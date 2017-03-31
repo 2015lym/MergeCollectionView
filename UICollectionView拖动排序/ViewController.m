@@ -87,15 +87,15 @@
 
 #pragma mark - ---------- 更新数据源 ----------
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath {
-
     //移除数据插入到新的位置
-    [_dataArray removeObject:[_dataArray objectAtIndex:sourceIndexPath.item]];
-    [_dataArray insertObject:[_dataArray objectAtIndex:sourceIndexPath.item]
-                     atIndex:destinationIndexPath.item];
+    id obj = [_dataArray objectAtIndex:sourceIndexPath.row];
+    [_dataArray removeObject:[_dataArray objectAtIndex:sourceIndexPath.row]];
+    [_dataArray insertObject:obj
+                     atIndex:destinationIndexPath.row];
 }
 
 #pragma mark - ---------- 拖动手势 ----------
-- (void)action:(UILongPressGestureRecognizer *)longGesture{
+- (void)action:(UILongPressGestureRecognizer *)longGesture {
     switch (longGesture.state) {
         case UIGestureRecognizerStateBegan:{//手势开始
             //判断手势落点位置是否在Item上
