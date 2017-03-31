@@ -13,6 +13,8 @@
 		38AB7E041E8DFA5B004C0A46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E021E8DFA5B004C0A46 /* Main.storyboard */; };
 		38AB7E061E8DFA5B004C0A46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E051E8DFA5B004C0A46 /* Assets.xcassets */; };
 		38AB7E091E8DFA5B004C0A46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E071E8DFA5B004C0A46 /* LaunchScreen.storyboard */; };
+		38AB7E131E8DFEFF004C0A46 /* ymCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7E111E8DFEFF004C0A46 /* ymCollectionViewCell.m */; };
+		38AB7E141E8DFEFF004C0A46 /* ymCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E121E8DFEFF004C0A46 /* ymCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,9 @@
 		38AB7E051E8DFA5B004C0A46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38AB7E081E8DFA5B004C0A46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38AB7E0A1E8DFA5B004C0A46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38AB7E101E8DFEFF004C0A46 /* ymCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ymCollectionViewCell.h; sourceTree = "<group>"; };
+		38AB7E111E8DFEFF004C0A46 /* ymCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ymCollectionViewCell.m; sourceTree = "<group>"; };
+		38AB7E121E8DFEFF004C0A46 /* ymCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ymCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +72,9 @@
 				38AB7E071E8DFA5B004C0A46 /* LaunchScreen.storyboard */,
 				38AB7E0A1E8DFA5B004C0A46 /* Info.plist */,
 				38AB7DF91E8DFA5B004C0A46 /* Supporting Files */,
+				38AB7E101E8DFEFF004C0A46 /* ymCollectionViewCell.h */,
+				38AB7E111E8DFEFF004C0A46 /* ymCollectionViewCell.m */,
+				38AB7E121E8DFEFF004C0A46 /* ymCollectionViewCell.xib */,
 			);
 			path = "UICollectionView拖动排序";
 			sourceTree = "<group>";
@@ -140,6 +148,7 @@
 			files = (
 				38AB7E091E8DFA5B004C0A46 /* LaunchScreen.storyboard in Resources */,
 				38AB7E061E8DFA5B004C0A46 /* Assets.xcassets in Resources */,
+				38AB7E141E8DFEFF004C0A46 /* ymCollectionViewCell.xib in Resources */,
 				38AB7E041E8DFA5B004C0A46 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +162,7 @@
 			files = (
 				38AB7E011E8DFA5B004C0A46 /* ViewController.m in Sources */,
 				38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */,
+				38AB7E131E8DFEFF004C0A46 /* ymCollectionViewCell.m in Sources */,
 				38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +322,7 @@
 				38AB7E0F1E8DFA5B004C0A46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

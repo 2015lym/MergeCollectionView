@@ -7,11 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "ymCollectionViewCell.h"
 
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
 
-#define ITEM_NUMBER 20
+#define ITEM_NUMBER 50
 
 @interface ViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -45,6 +46,7 @@
 
 #pragma mark - ---------- 创建collectionView ----------
 - (void)createCollectionView {
+    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake((SCREENWIDTH-15) / 4, (SCREENWIDTH-15) / 4);
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, SCREENWIDTH, SCREENHEIGHT - 20) collectionViewLayout:layout];
@@ -55,7 +57,7 @@
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-    
+    [_collectionView registerNib:[UINib nibWithNibName:@"ymCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ymCollectionViewCell"];
     //此处给其增加长按手势，用此手势触发cell移动效果
     UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
     longGesture.minimumPressDuration = 0.5f;//触发长按事件时间为：秒
@@ -70,8 +72,10 @@
 
 #pragma mark - ---------- Cell的内容 ----------
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.backgroundColor = _dataArray[indexPath.item];
+    ymCollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"ymCollectionViewCell" forIndexPath:indexPath];
+    cell.contentLabel.text = @"请假审批";
+    cell.imageView.image = [UIImage imageNamed:@"proper_logo"];
+//    cell.backgroundColor = _dataArray[indexPath.item];
     return cell;
 }
 
