@@ -32,11 +32,8 @@
     
     //产生随机颜色的方块
     for (int i = 1; i <= ITEM_NUMBER; i++) {
-        CGFloat hue = ( arc4random() % 256 / 256.0 );
-        CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
-        CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
-        UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:0.8];
-        [_dataArray addObject:color];
+        NSString *str = [NSString stringWithFormat:@"%d", i];
+        [_dataArray addObject:str];
     }
 }
 
@@ -73,9 +70,8 @@
 #pragma mark - ---------- Cell的内容 ----------
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     ymCollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"ymCollectionViewCell" forIndexPath:indexPath];
-    cell.contentLabel.text = @"请假审批";
+    cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@", _dataArray[indexPath.row]];
     cell.imageView.image = [UIImage imageNamed:@"proper_logo"];
-//    cell.backgroundColor = _dataArray[indexPath.item];
     return cell;
 }
 
@@ -91,12 +87,11 @@
 
 #pragma mark - ---------- 更新数据源 ----------
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath {
-    //取出源item数据 更新
-    id objc = [_dataArray objectAtIndex:sourceIndexPath.item];
-    //从资源数组中移除该数据
-    [_dataArray removeObject:objc];
-    //将数据插入到资源数组中的目标位置上
-    [_dataArray insertObject:objc atIndex:destinationIndexPath.item];
+
+    //移除数据插入到新的位置
+    [_dataArray removeObject:[_dataArray objectAtIndex:sourceIndexPath.item]];
+    [_dataArray insertObject:[_dataArray objectAtIndex:sourceIndexPath.item]
+                     atIndex:destinationIndexPath.item];
 }
 
 #pragma mark - ---------- 拖动手势 ----------
