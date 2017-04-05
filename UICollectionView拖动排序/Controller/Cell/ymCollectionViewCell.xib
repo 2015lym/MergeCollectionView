@@ -26,37 +26,37 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWs-3s-qJB">
-                        <rect key="frame" x="0.5" y="0.0" width="99" height="0.5"/>
+                        <rect key="frame" x="0.5" y="0.0" width="99.5" height="0.5"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="0.34999999999999998" id="KvM-Bt-JBk"/>
+                            <constraint firstAttribute="height" constant="0.5" id="KvM-Bt-JBk"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请假审批" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9C1-Ql-pFr">
-                        <rect key="frame" x="23.5" y="75" width="53.5" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请假审批" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9C1-Ql-pFr">
+                        <rect key="frame" x="0.5" y="75" width="99.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALa-K6-cvg">
-                        <rect key="frame" x="99.5" y="0.0" width="0.5" height="100"/>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALa-K6-cvg">
+                        <rect key="frame" x="100" y="0.0" width="0.5" height="100"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="0.34999999999999998" id="e2d-Vj-naH"/>
+                            <constraint firstAttribute="width" constant="0.5" id="e2d-Vj-naH"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pig-h0-Zfc">
                         <rect key="frame" x="0.0" y="0.0" width="0.5" height="100"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="0.34999999999999998" id="lyJ-9t-HBl"/>
+                            <constraint firstAttribute="width" constant="0.5" id="lyJ-9t-HBl"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QL1-8L-kmA">
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QL1-8L-kmA">
                         <rect key="frame" x="0.0" y="99.5" width="100" height="0.5"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="0.34999999999999998" id="JgU-3x-vab"/>
+                            <constraint firstAttribute="height" constant="0.5" id="JgU-3x-vab"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -78,8 +78,10 @@
                 <constraint firstAttribute="bottom" secondItem="QL1-8L-kmA" secondAttribute="bottom" id="fKE-yc-QnG"/>
                 <constraint firstItem="OiO-8m-SoA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="g5X-G8-jDX"/>
                 <constraint firstAttribute="bottom" secondItem="Pig-h0-Zfc" secondAttribute="bottom" id="kqz-t2-JDe"/>
+                <constraint firstItem="9C1-Ql-pFr" firstAttribute="leading" secondItem="Pig-h0-Zfc" secondAttribute="trailing" id="lk8-xe-DQT"/>
                 <constraint firstAttribute="trailing" secondItem="ALa-K6-cvg" secondAttribute="trailing" id="pYl-nW-VZm"/>
                 <constraint firstAttribute="trailing" secondItem="OiO-8m-SoA" secondAttribute="trailing" constant="20" id="qlk-Ol-pkV"/>
+                <constraint firstItem="ALa-K6-cvg" firstAttribute="leading" secondItem="9C1-Ql-pFr" secondAttribute="trailing" id="r5N-8E-6gx"/>
                 <constraint firstItem="OiO-8m-SoA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="xxj-o9-ByX"/>
             </constraints>
             <connections>
