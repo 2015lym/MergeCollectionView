@@ -38,10 +38,13 @@
     [super didReceiveMemoryWarning];
 }
 
+//排序
 - (void)sortVC {
     SortViewController *vc = [[SortViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+//合并+排序
 - (void)mergeVC {
     MergeViewController *vc = [[MergeViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
