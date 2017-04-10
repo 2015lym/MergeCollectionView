@@ -11,27 +11,48 @@
 
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
+#define WIDTH_5S_SCALE 320.0 * [UIScreen mainScreen].bounds.size.width
 
 #define ITEM_NUMBER 50
 
-
+static NSString * const kImage = @"kImage";             //logo图片
+static NSString * const kTitle = @"kTitle";             //图片标题
+typedef NS_ENUM(NSInteger, kMoveType){
+    kMoveTypeNone,
+    kMoveTypeExchange,
+    kMoveTypeMerge
+};
 @interface MergeViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray<NSArray *> *containerArray;
 @property (nonatomic, strong) UICollectionView * collectionView;
+@property (nonatomic, strong) UICollectionView * containerCollectionView;
+@property (nonatomic, assign) kMoveType moveType;
 @end
 
 @implementation MergeViewController
+- (NSMutableArray *)containerArray{
+    if (!_containerArray) {
+        _containerArray = [[NSMutableArray alloc]init];
+    }
+    return _containerArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createCollectionView];
+    _moveType = kMoveTypeNone;
     
     _dataArray = [NSMutableArray array];
-    
     //产生随机颜色的方块
     for (int i = 1; i <= ITEM_NUMBER; i++) {
         NSString *str = [NSString stringWithFormat:@"%d", i];
-        [_dataArray addObject:str];
+//        [_dataArray addObject:str];
+        UIImage *image = [UIImage imageNamed:@"proper_logo"];
+//        [self.imageArray addObject:image];
+        NSDictionary *dic = @{kImage:image,kTitle:str};
+        [_dataArray addObject:dic];
+        [self.containerArray addObject:@[dic]];
     }
 }
 - (void)didReceiveMemoryWarning {
@@ -70,6 +91,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ymCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ymCollectionViewCell" forIndexPath:indexPath];
+    cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@",self.dataArray[indexPath.row][kTitle]];
+    cell.imageView.image = self.dataArray[indexPath.row][kImage];
     return cell;
 }
 
@@ -86,17 +109,19 @@
 static UIView *snapedView;              //截图快照
 static NSIndexPath *currentIndexPath;   //当前路径
 static NSIndexPath *oldIndexPath;       //旧路径
+static NSIndexPath *startIndexPath;   //起始路径
 - (void)action:(UILongPressGestureRecognizer *)longGesture{
-    
     switch (longGesture.state) {
         case UIGestureRecognizerStateBegan:{//手势开始
             //判断手势落点位置是否在Item上
             oldIndexPath = [self.collectionView indexPathForItemAtPoint:[longGesture locationInView:self.collectionView]];
+            startIndexPath = oldIndexPath;
             if (oldIndexPath == nil) {
                 break;
             }
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:oldIndexPath];
             //使用系统截图功能，得到cell的截图视图
+
             snapedView = [cell snapshotViewAfterScreenUpdates:NO];
             snapedView.frame = cell.frame;
             [self.collectionView addSubview:snapedView];
@@ -113,6 +138,11 @@ static NSIndexPath *oldIndexPath;       //旧路径
             //当前手指位置 - 截图视图位置移动
             CGPoint currentPoint = [longGesture locationInView:self.collectionView];
             snapedView.center = CGPointMake(currentPoint.x, currentPoint.y);
+        }
+            break;
+        default:{//手势结束和其他状态
+            CGPoint currentPoint = [longGesture locationInView:self.collectionView];
+            snapedView.center = CGPointMake(currentPoint.x, currentPoint.y);
             
             //计算截图视图和哪个cell相交
             for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
@@ -122,28 +152,46 @@ static NSIndexPath *oldIndexPath;       //旧路径
                 }
                 //计算中心距
                 CGFloat space = sqrtf(pow(snapedView.center.x - cell.center.x, 2) + powf(snapedView.center.y - cell.center.y, 2));
+                NSLog(@"%f",space);
                 //如果相交一半就移动
-                if (space <= snapedView.bounds.size.width / 2) {
+                if (space <= 10.0) {
+                    currentIndexPath = [self.collectionView indexPathForCell:cell];
+                    //                    [self.collectionView moveItemAtIndexPath:oldIndexPath toIndexPath:currentIndexPath];
+                    if (self.containerArray[startIndexPath.row].count!=1) {
+                        return;
+                    }
+                    _moveType = kMoveTypeMerge;
+                    oldIndexPath = currentIndexPath;
+                    break;
+                }
+                if(space <= snapedView.bounds.size.width*3 / 4){
                     currentIndexPath = [self.collectionView indexPathForCell:cell];
                     //移动 会调用willMoveToIndexPath方法更新数据源
-                    [self.collectionView moveItemAtIndexPath:oldIndexPath toIndexPath:currentIndexPath];
-                    
-                    
-                    //移除数据插入到新的位置
-                    id obj = [_dataArray objectAtIndex:oldIndexPath.row];
-                    [_dataArray removeObject:[_dataArray objectAtIndex:oldIndexPath.row]];
-                    [_dataArray insertObject:obj
-                                     atIndex:currentIndexPath.row];
-                    
-                    
+                    _moveType = kMoveTypeExchange;
                     //设置移动后的起始indexPath
                     oldIndexPath = currentIndexPath;
                     break;
                 }
             }
-        }
-            break;
-        default:{//手势结束和其他状态
+            if (_moveType == kMoveTypeExchange) {
+                [self.collectionView moveItemAtIndexPath:startIndexPath toIndexPath:currentIndexPath];
+                //移除数据插入到新的位置
+                id obj = [_dataArray objectAtIndex:startIndexPath.row];
+                [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.row]];
+                [_dataArray insertObject:obj
+                                 atIndex:currentIndexPath.row];
+                
+            }else if (_moveType == kMoveTypeMerge){
+                NSMutableArray *mergeArray = [[NSMutableArray alloc]init];
+                [self.containerArray[currentIndexPath.row] enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [mergeArray addObject:obj];
+                }];
+                [mergeArray addObject:self.containerArray[startIndexPath.row][0]];
+                [self.containerArray replaceObjectAtIndex:currentIndexPath.row withObject:mergeArray];
+                [self.containerArray removeObjectAtIndex:startIndexPath.row];
+                [_dataArray replaceObjectAtIndex:currentIndexPath.row withObject:@{kTitle:@"合成兽",kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.row]]}];
+                [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.row]];
+            }
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:oldIndexPath];
             //结束动画过程中停止交互，防止出问题
             self.collectionView.userInteractionEnabled = NO;
@@ -163,5 +211,18 @@ static NSIndexPath *oldIndexPath;       //旧路径
     }
 }
 
-
+- (UIImage *)setMergeImageWithImageArray:(NSArray *)imageArray{
+    CGSize size = CGSizeMake(SCREENWIDTH/4-40,SCREENWIDTH/4-40);
+    UIGraphicsBeginImageContext(size);
+    [imageArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIImage *image = obj[kImage];
+        [image drawInRect:CGRectMake(5/WIDTH_5S_SCALE+15/WIDTH_5S_SCALE*(idx%2), 5/WIDTH_5S_SCALE+15/WIDTH_5S_SCALE*(idx/2), 10/WIDTH_5S_SCALE, 10/WIDTH_5S_SCALE)];
+        if (idx>3) {
+            *stop = YES;
+        }
+    }];
+    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resultImage;
+}
 @end

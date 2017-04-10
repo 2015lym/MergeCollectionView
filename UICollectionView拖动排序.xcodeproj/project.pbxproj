@@ -160,7 +160,7 @@
 				TargetAttributes = {
 					38AB7DF51E8DFA5B004C0A46 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = PT38H38E4T;
+						DevelopmentTeam = L7P6N237GX;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -327,8 +327,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PT38H38E4T;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = L7P6N237GX;
 				INFOPLIST_FILE = "UICollectionView拖动排序/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Lym.UICollectionView----";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -339,8 +341,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PT38H38E4T;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = L7P6N237GX;
 				INFOPLIST_FILE = "UICollectionView拖动排序/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Lym.UICollectionView----";
 				PRODUCT_NAME = "$(TARGET_NAME)";
