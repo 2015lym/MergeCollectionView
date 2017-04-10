@@ -177,20 +177,20 @@ static NSIndexPath *startIndexPath;   //起始路径
                 [self.collectionView moveItemAtIndexPath:startIndexPath toIndexPath:currentIndexPath];
                 //移除数据插入到新的位置
                 id obj = [_dataArray objectAtIndex:startIndexPath.row];
-                [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.row]];
+                [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
                 [_dataArray insertObject:obj
-                                 atIndex:currentIndexPath.row];
+                                 atIndex:currentIndexPath.item];
                 
             }else if (_moveType == kMoveTypeMerge){
                 NSMutableArray *mergeArray = [[NSMutableArray alloc]init];
                 [self.containerArray[currentIndexPath.row] enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     [mergeArray addObject:obj];
                 }];
-                [mergeArray addObject:self.containerArray[startIndexPath.row][0]];
-                [self.containerArray replaceObjectAtIndex:currentIndexPath.row withObject:mergeArray];
-                [self.containerArray removeObjectAtIndex:startIndexPath.row];
-                [_dataArray replaceObjectAtIndex:currentIndexPath.row withObject:@{kTitle:@"合成兽",kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.row]]}];
-                [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.row]];
+                [mergeArray addObject:self.containerArray[startIndexPath.item][0]];
+                [self.containerArray replaceObjectAtIndex:currentIndexPath.item withObject:mergeArray];
+                [self.containerArray removeObjectAtIndex:startIndexPath.item];
+                [_dataArray replaceObjectAtIndex:currentIndexPath.row withObject:@{kTitle:@"合成兽",kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
+                [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
             }
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:oldIndexPath];
             //结束动画过程中停止交互，防止出问题
