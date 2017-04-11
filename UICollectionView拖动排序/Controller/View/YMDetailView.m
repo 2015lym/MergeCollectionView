@@ -1,19 +1,18 @@
 //
-//  MergeViewController.m
+//  YMDetailView.m
 //  UICollectionView拖动排序
 //
-//  Created by Lym on 2017/4/5.
+//  Created by Lym on 2017/4/11.
 //  Copyright © 2017年 Lym. All rights reserved.
 //
 
-#import "MergeViewController.h"
-#import "ymCollectionViewCell.h"
 #import "YMDetailView.h"
+#import "ymCollectionViewCell.h"
 
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
 #define WIDTH_5S_SCALE 320.0 * [UIScreen mainScreen].bounds.size.width
-#define GRAY_VIEW [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.5]
+
 #define ITEM_NUMBER 10
 
 static NSString * const kImage = @"kImage";             //logo图片
@@ -23,25 +22,23 @@ typedef NS_ENUM(NSInteger, kMoveType){
     kMoveTypeExchange,
     kMoveTypeMerge
 };
-@interface MergeViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
+@interface YMDetailView ()
+@property (weak, nonatomic) IBOutlet UITextField *folderTitleTextField;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *dataArray;//collectionView数据源数组
 @property (nonatomic, strong) NSMutableArray<NSArray *> *containerArray;//记录包含合并的数组
-@property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) UICollectionView * containerCollectionView;
 @property (nonatomic, assign) kMoveType moveType;//移动方式，移动or合并
-@property (nonatomic, strong) UIView *grayView;
+
 @end
 
-@implementation MergeViewController
-- (NSMutableArray *)containerArray{
-    if (!_containerArray) {
-        _containerArray = [[NSMutableArray alloc]init];
-    }
-    return _containerArray;
-}
+@implementation YMDetailView
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    _folderTitleTextField.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
+    
     [self createCollectionView];
     _moveType = kMoveTypeNone;
     
@@ -55,8 +52,11 @@ typedef NS_ENUM(NSInteger, kMoveType){
         [self.containerArray addObject:@[dic]];
     }
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+
 }
 
 #pragma mark - ---------- 创建collectionView ----------
@@ -68,18 +68,16 @@ typedef NS_ENUM(NSInteger, kMoveType){
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, SCREENWIDTH, SCREENHEIGHT - 20) collectionViewLayout:layout];
+    _collectionView.collectionViewLayout = layout;
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
     [_collectionView registerNib:[UINib nibWithNibName:@"ymCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ymCollectionViewCell"];
     //此处给其增加长按手势，用此手势触发cell移动效果
     UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
     longGesture.minimumPressDuration = 0.5f;//触发长按事件时间为：秒
     [_collectionView addGestureRecognizer:longGesture];
-    [self.view addSubview:self.collectionView];
+//    [self addSubview:self.collectionView];
 }
 
 #pragma mark - delegate
@@ -94,33 +92,6 @@ typedef NS_ENUM(NSInteger, kMoveType){
     cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@",self.dataArray[indexPath.item][kTitle]];
     cell.imageView.image = self.dataArray[indexPath.item][kImage];
     return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (_containerArray[indexPath.item].count != 1) {
-        [self setGrayView];
-        YMDetailView *detailView = [[NSBundle mainBundle] loadNibNamed:@"YMDetailView" owner:self options:nil].lastObject;
-        detailView.frame = CGRectMake(SCREENWIDTH/8,
-                                      (SCREENHEIGHT - 3 * SCREENWIDTH/4)/2 - 50,
-                                      3 * SCREENWIDTH/4 + 1,
-                                      3 * SCREENWIDTH/4 + 100);
-        detailView.backgroundColor = [UIColor clearColor];
-        [_grayView addSubview:detailView];
-    }
-}
-
-#pragma mark - ---------- 灰色背景 ----------
-- (void)setGrayView {
-    _grayView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
-    _grayView.backgroundColor = GRAY_VIEW;
-    [[UIApplication sharedApplication].keyWindow addSubview:_grayView];
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissContactView)];
-    [_grayView addGestureRecognizer:tapGesture];
-}
-
-- (void)dismissContactView {
-    [_grayView removeFromSuperview];
 }
 
 #pragma mark - ---------- 监听手势 ----------
@@ -144,7 +115,7 @@ static NSIndexPath *startIndexPath;   //起始路径
             }
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:oldIndexPath];
             //使用系统截图功能，得到cell的截图视图
-
+            
             snapedView = [cell snapshotViewAfterScreenUpdates:NO];
             snapedView.frame = cell.frame;
             [self.collectionView addSubview:snapedView];
@@ -171,7 +142,6 @@ static NSIndexPath *startIndexPath;   //起始路径
             for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
                 //当前隐藏的cell就不需要交换了，直接continue
                 if ([self.collectionView indexPathForCell:cell] == oldIndexPath) {
-                    _moveType = kMoveTypeNone;
                     continue;
                 }
                 //计算中心距
@@ -187,7 +157,6 @@ static NSIndexPath *startIndexPath;   //起始路径
                 }
                 //如果中心距离小于10就合并
                 if (space <= 10.0) {
-                    //如果拖动的是一个合并过的cell，则不执行二次合并
                     if (self.containerArray[startIndexPath.row].count==1) {
                         currentIndexPath = [self.collectionView indexPathForCell:cell];
                         _moveType = kMoveTypeMerge;
@@ -199,8 +168,8 @@ static NSIndexPath *startIndexPath;   //起始路径
                 }
             }
             if (_moveType == kMoveTypeExchange) {
-                //移除数据插入到新的位置
                 [self.collectionView moveItemAtIndexPath:startIndexPath toIndexPath:currentIndexPath];
+                //移除数据插入到新的位置
                 id obj = [_dataArray objectAtIndex:startIndexPath.item];
                 [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
                 [_dataArray insertObject:obj
@@ -208,7 +177,7 @@ static NSIndexPath *startIndexPath;   //起始路径
                 id containerObj = [self.containerArray objectAtIndex:startIndexPath.item];
                 [self.containerArray removeObject:[self.containerArray objectAtIndex:startIndexPath.item]];
                 [self.containerArray insertObject:containerObj
-                                 atIndex:currentIndexPath.item];
+                                          atIndex:currentIndexPath.item];
                 
             }else if (_moveType == kMoveTypeMerge){
                 //设置合并后的新数组
@@ -221,8 +190,6 @@ static NSIndexPath *startIndexPath;   //起始路径
                 [_dataArray replaceObjectAtIndex:currentIndexPath.row withObject:@{kTitle:@"合成兽",kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
                 [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
                 [self.containerArray removeObjectAtIndex:startIndexPath.item];
-            }else if (_moveType == kMoveTypeNone){
-                currentIndexPath = startIndexPath;
             }
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:oldIndexPath];//原来隐藏的cell
             UICollectionViewCell *targetCell = [self.collectionView cellForItemAtIndexPath:currentIndexPath];//移动目标cell
@@ -264,4 +231,5 @@ static NSIndexPath *startIndexPath;   //起始路径
     UIGraphicsEndImageContext();
     return resultImage;
 }
+
 @end

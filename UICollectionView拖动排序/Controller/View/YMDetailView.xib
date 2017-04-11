@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YMDetailView">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="标题" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zMV-Ss-lC4">
+                    <rect key="frame" x="50" y="25" width="200" height="40"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="8fD-by-N3b"/>
+                    </constraints>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="USX-iw-5DA">
+                    <rect key="frame" x="0.0" y="100" width="300" height="300"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="USX-iw-5DA" secondAttribute="height" id="28K-1v-lvz"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Cub-gu-B9o">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="u1E-bZ-bYJ"/>
+                        <outlet property="delegate" destination="-1" id="wPY-8F-CsB"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="USX-iw-5DA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Hul-kH-bTY"/>
+                <constraint firstItem="zMV-Ss-lC4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="bLL-8h-zv8"/>
+                <constraint firstAttribute="trailing" secondItem="zMV-Ss-lC4" secondAttribute="trailing" constant="50" id="cvs-TR-GZ0"/>
+                <constraint firstAttribute="bottom" secondItem="USX-iw-5DA" secondAttribute="bottom" id="d5D-eY-j4m"/>
+                <constraint firstItem="zMV-Ss-lC4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="iAO-8y-mgp"/>
+                <constraint firstAttribute="trailing" secondItem="USX-iw-5DA" secondAttribute="trailing" id="qIu-1F-iOV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionView" destination="USX-iw-5DA" id="Kyn-GR-s0N"/>
+                <outlet property="folderTitleTextField" destination="zMV-Ss-lC4" id="nFu-Oh-5c0"/>
+            </connections>
+        </view>
+    </objects>
+</document>

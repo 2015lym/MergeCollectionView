@@ -73,6 +73,7 @@
 				38E963ED1E9C69FF002B99C2 /* 2拖动排序+合并 */,
 				38E963F01E9C69FF002B99C2 /* 3测试专用 */,
 				386B75581E94C83E00081D09 /* Cell */,
+				383BB55B1E9CB4160026069F /* View */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -215,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38AB7E091E8DFA5B004C0A46 /* LaunchScreen.storyboard in Resources */,
+				385DA1B91E9CB4B900126F73 /* YMDetailView.xib in Resources */,
 				38AB7E061E8DFA5B004C0A46 /* Assets.xcassets in Resources */,
 				386B75611E94C83E00081D09 /* ymCollectionViewCell.xib in Resources */,
 				38AB7E041E8DFA5B004C0A46 /* Main.storyboard in Resources */,
@@ -234,6 +236,7 @@
 				38E963F51E9C6A17002B99C2 /* TestViewController.m in Sources */,
 				38E963F11E9C69FF002B99C2 /* SortViewController.m in Sources */,
 				386B75601E94C83E00081D09 /* ymCollectionViewCell.m in Sources */,
+				385DA1B71E9CB49D00126F73 /* YMDetailView.m in Sources */,
 				38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */,
 				38E963F21E9C69FF002B99C2 /* MergeViewController.m in Sources */,
 			);
