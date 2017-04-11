@@ -1,12 +1,12 @@
 //
-//  TestViewController.m
+//  YMDetailView.m
 //  UICollectionView拖动排序
 //
 //  Created by Lym on 2017/4/11.
 //  Copyright © 2017年 Lym. All rights reserved.
 //
 
-#import "TestViewController.h"
+#import "YMDetailView.h"
 #import "ymCollectionViewCell.h"
 
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
@@ -22,26 +22,23 @@ typedef NS_ENUM(NSInteger, kMoveType){
     kMoveTypeExchange,
     kMoveTypeMerge
 };
-@interface TestViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
+@interface YMDetailView ()
+@property (weak, nonatomic) IBOutlet UITextField *folderTitleTextField;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *dataArray;//collectionView数据源数组
 @property (nonatomic, strong) NSMutableArray<NSArray *> *containerArray;//记录包含合并的数组
-@property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) UICollectionView * containerCollectionView;
 @property (nonatomic, assign) kMoveType moveType;//移动方式，移动or合并
 
-
 @end
 
-@implementation TestViewController
-- (NSMutableArray *)containerArray{
-    if (!_containerArray) {
-        _containerArray = [[NSMutableArray alloc]init];
-    }
-    return _containerArray;
-}
+@implementation YMDetailView
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    _folderTitleTextField.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
+    
     [self createCollectionView];
     _moveType = kMoveTypeNone;
     
@@ -55,8 +52,11 @@ typedef NS_ENUM(NSInteger, kMoveType){
         [self.containerArray addObject:@[dic]];
     }
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+
 }
 
 #pragma mark - ---------- 创建collectionView ----------
@@ -68,18 +68,16 @@ typedef NS_ENUM(NSInteger, kMoveType){
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, SCREENWIDTH, SCREENHEIGHT - 20) collectionViewLayout:layout];
+    _collectionView.collectionViewLayout = layout;
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
     [_collectionView registerNib:[UINib nibWithNibName:@"ymCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ymCollectionViewCell"];
     //此处给其增加长按手势，用此手势触发cell移动效果
     UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
     longGesture.minimumPressDuration = 0.5f;//触发长按事件时间为：秒
     [_collectionView addGestureRecognizer:longGesture];
-    [self.view addSubview:self.collectionView];
+//    [self addSubview:self.collectionView];
 }
 
 #pragma mark - delegate
@@ -94,10 +92,6 @@ typedef NS_ENUM(NSInteger, kMoveType){
     cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@",self.dataArray[indexPath.item][kTitle]];
     cell.imageView.image = self.dataArray[indexPath.item][kImage];
     return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
 }
 
 #pragma mark - ---------- 监听手势 ----------
@@ -148,7 +142,6 @@ static NSIndexPath *startIndexPath;   //起始路径
             for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
                 //当前隐藏的cell就不需要交换了，直接continue
                 if ([self.collectionView indexPathForCell:cell] == oldIndexPath) {
-                    _moveType = kMoveTypeNone;
                     continue;
                 }
                 //计算中心距
@@ -238,4 +231,5 @@ static NSIndexPath *startIndexPath;   //起始路径
     UIGraphicsEndImageContext();
     return resultImage;
 }
+
 @end

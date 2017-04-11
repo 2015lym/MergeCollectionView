@@ -8,11 +8,12 @@
 
 #import "MergeViewController.h"
 #import "ymCollectionViewCell.h"
+#import "YMDetailView.h"
 
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
 #define WIDTH_5S_SCALE 320.0 * [UIScreen mainScreen].bounds.size.width
-
+#define GRAY_VIEW [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.5]
 #define ITEM_NUMBER 10
 
 static NSString * const kImage = @"kImage";             //logo图片
@@ -28,6 +29,7 @@ typedef NS_ENUM(NSInteger, kMoveType){
 @property (nonatomic, strong) UICollectionView * collectionView;
 @property (nonatomic, strong) UICollectionView * containerCollectionView;
 @property (nonatomic, assign) kMoveType moveType;//移动方式，移动or合并
+@property (nonatomic, strong) UIView *grayView;
 @end
 
 @implementation MergeViewController
@@ -95,7 +97,30 @@ typedef NS_ENUM(NSInteger, kMoveType){
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (_containerArray[indexPath.item].count != 1) {
+        [self setGrayView];
+        YMDetailView *detailView = [[NSBundle mainBundle] loadNibNamed:@"YMDetailView" owner:self options:nil].lastObject;
+        detailView.frame = CGRectMake(SCREENWIDTH/8,
+                                      (SCREENHEIGHT - 3 * SCREENWIDTH/4)/2 - 50,
+                                      3 * SCREENWIDTH/4 + 1,
+                                      3 * SCREENWIDTH/4 + 100);
+        detailView.backgroundColor = [UIColor clearColor];
+        [_grayView addSubview:detailView];
+    }
+}
+
+#pragma mark - ---------- 灰色背景 ----------
+- (void)setGrayView {
+    _grayView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    _grayView.backgroundColor = GRAY_VIEW;
+    [[UIApplication sharedApplication].keyWindow addSubview:_grayView];
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissContactView)];
+    [_grayView addGestureRecognizer:tapGesture];
+}
+
+- (void)dismissContactView {
+    [_grayView removeFromSuperview];
 }
 
 #pragma mark - ---------- 监听手势 ----------
@@ -146,6 +171,7 @@ static NSIndexPath *startIndexPath;   //起始路径
             for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
                 //当前隐藏的cell就不需要交换了，直接continue
                 if ([self.collectionView indexPathForCell:cell] == oldIndexPath) {
+                    _moveType = kMoveTypeNone;
                     continue;
                 }
                 //计算中心距
