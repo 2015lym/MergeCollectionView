@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, kMoveType){
 
 #pragma mark - ---------- 监听手势 ----------
 - (void)handlelongGesture:(UILongPressGestureRecognizer *)longGesture {
-        [self action:longGesture];
+    [self action:longGesture];
 }
 
 #pragma mark - ---------- 拖动手势 ----------
@@ -218,12 +218,15 @@ static NSIndexPath *startIndexPath;   //起始路径
 #pragma mark - ---------- 合成新图标 ----------
 - (UIImage *)setMergeImageWithImageArray:(NSArray *)imageArray{
     //新图标大小
-    CGSize size = CGSizeMake(SCREENWIDTH/4-40,SCREENWIDTH/4-40);
+    CGSize size = CGSizeMake(SCREENWIDTH/4-40, SCREENWIDTH/4-40);
     UIGraphicsBeginImageContext(size);
     //从数组中取图片进行拼接
     [imageArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIImage *image = obj[kImage];
-        [image drawInRect:CGRectMake(5/WIDTH_5S_SCALE+15/WIDTH_5S_SCALE*(idx%2), 5/WIDTH_5S_SCALE+15/WIDTH_5S_SCALE*(idx/2), 10/WIDTH_5S_SCALE, 10/WIDTH_5S_SCALE)];
+        [image drawInRect:CGRectMake(5/WIDTH_5S_SCALE + 15/WIDTH_5S_SCALE*(idx%2),
+                                     5/WIDTH_5S_SCALE + 15/WIDTH_5S_SCALE*(idx/2),
+                                     10/WIDTH_5S_SCALE,
+                                     10/WIDTH_5S_SCALE)];
         if (idx>=3) {
             *stop = YES;
         }

@@ -9,24 +9,21 @@
 /* Begin PBXBuildFile section */
 		386B75601E94C83E00081D09 /* ymCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 386B755A1E94C83E00081D09 /* ymCollectionViewCell.m */; };
 		386B75611E94C83E00081D09 /* ymCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 386B755B1E94C83E00081D09 /* ymCollectionViewCell.xib */; };
-		386B75621E94C83E00081D09 /* MergeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386B755F1E94C83E00081D09 /* MergeViewController.m */; };
-		386B75651E94C85800081D09 /* SortViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386B75641E94C85800081D09 /* SortViewController.m */; };
 		38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7DFA1E8DFA5B004C0A46 /* main.m */; };
 		38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7DFD1E8DFA5B004C0A46 /* AppDelegate.m */; };
 		38AB7E011E8DFA5B004C0A46 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7E001E8DFA5B004C0A46 /* ViewController.m */; };
 		38AB7E041E8DFA5B004C0A46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E021E8DFA5B004C0A46 /* Main.storyboard */; };
 		38AB7E061E8DFA5B004C0A46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E051E8DFA5B004C0A46 /* Assets.xcassets */; };
 		38AB7E091E8DFA5B004C0A46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E071E8DFA5B004C0A46 /* LaunchScreen.storyboard */; };
+		38E963F11E9C69FF002B99C2 /* SortViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E963EC1E9C69FF002B99C2 /* SortViewController.m */; };
+		38E963F21E9C69FF002B99C2 /* MergeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E963EF1E9C69FF002B99C2 /* MergeViewController.m */; };
+		38E963F51E9C6A17002B99C2 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E963F41E9C6A17002B99C2 /* TestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		386B75591E94C83E00081D09 /* ymCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ymCollectionViewCell.h; sourceTree = "<group>"; };
 		386B755A1E94C83E00081D09 /* ymCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ymCollectionViewCell.m; sourceTree = "<group>"; };
 		386B755B1E94C83E00081D09 /* ymCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ymCollectionViewCell.xib; sourceTree = "<group>"; };
-		386B755E1E94C83E00081D09 /* MergeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeViewController.h; sourceTree = "<group>"; };
-		386B755F1E94C83E00081D09 /* MergeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeViewController.m; sourceTree = "<group>"; };
-		386B75631E94C85800081D09 /* SortViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortViewController.h; sourceTree = "<group>"; };
-		386B75641E94C85800081D09 /* SortViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortViewController.m; sourceTree = "<group>"; };
 		38AB7DF61E8DFA5B004C0A46 /* UICollectionView拖动排序.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UICollectionView拖动排序.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AB7DFA1E8DFA5B004C0A46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		38AB7DFC1E8DFA5B004C0A46 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -37,6 +34,12 @@
 		38AB7E051E8DFA5B004C0A46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38AB7E081E8DFA5B004C0A46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38AB7E0A1E8DFA5B004C0A46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38E963EB1E9C69FF002B99C2 /* SortViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortViewController.h; sourceTree = "<group>"; };
+		38E963EC1E9C69FF002B99C2 /* SortViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortViewController.m; sourceTree = "<group>"; };
+		38E963EE1E9C69FF002B99C2 /* MergeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeViewController.h; sourceTree = "<group>"; };
+		38E963EF1E9C69FF002B99C2 /* MergeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeViewController.m; sourceTree = "<group>"; };
+		38E963F31E9C6A17002B99C2 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		38E963F41E9C6A17002B99C2 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +56,10 @@
 		386B75571E94C83E00081D09 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				38E963EA1E9C69FF002B99C2 /* 1拖动排序 */,
+				38E963ED1E9C69FF002B99C2 /* 2拖动排序+合并 */,
+				38E963F01E9C69FF002B99C2 /* 3测试专用 */,
 				386B75581E94C83E00081D09 /* Cell */,
-				386B755C1E94C83E00081D09 /* 拖动排序 */,
-				386B755D1E94C83E00081D09 /* 拖动排序+合并 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -68,24 +72,6 @@
 				386B755B1E94C83E00081D09 /* ymCollectionViewCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		386B755C1E94C83E00081D09 /* 拖动排序 */ = {
-			isa = PBXGroup;
-			children = (
-				386B75631E94C85800081D09 /* SortViewController.h */,
-				386B75641E94C85800081D09 /* SortViewController.m */,
-			);
-			path = "拖动排序";
-			sourceTree = "<group>";
-		};
-		386B755D1E94C83E00081D09 /* 拖动排序+合并 */ = {
-			isa = PBXGroup;
-			children = (
-				386B755E1E94C83E00081D09 /* MergeViewController.h */,
-				386B755F1E94C83E00081D09 /* MergeViewController.m */,
-			);
-			path = "拖动排序+合并";
 			sourceTree = "<group>";
 		};
 		38AB7DED1E8DFA5B004C0A46 = {
@@ -127,6 +113,33 @@
 				38AB7DFA1E8DFA5B004C0A46 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		38E963EA1E9C69FF002B99C2 /* 1拖动排序 */ = {
+			isa = PBXGroup;
+			children = (
+				38E963EB1E9C69FF002B99C2 /* SortViewController.h */,
+				38E963EC1E9C69FF002B99C2 /* SortViewController.m */,
+			);
+			path = "1拖动排序";
+			sourceTree = "<group>";
+		};
+		38E963ED1E9C69FF002B99C2 /* 2拖动排序+合并 */ = {
+			isa = PBXGroup;
+			children = (
+				38E963EE1E9C69FF002B99C2 /* MergeViewController.h */,
+				38E963EF1E9C69FF002B99C2 /* MergeViewController.m */,
+			);
+			path = "2拖动排序+合并";
+			sourceTree = "<group>";
+		};
+		38E963F01E9C69FF002B99C2 /* 3测试专用 */ = {
+			isa = PBXGroup;
+			children = (
+				38E963F31E9C6A17002B99C2 /* TestViewController.h */,
+				38E963F41E9C6A17002B99C2 /* TestViewController.m */,
+			);
+			path = "3测试专用";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,12 +215,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				386B75651E94C85800081D09 /* SortViewController.m in Sources */,
 				38AB7E011E8DFA5B004C0A46 /* ViewController.m in Sources */,
 				38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */,
+				38E963F51E9C6A17002B99C2 /* TestViewController.m in Sources */,
+				38E963F11E9C69FF002B99C2 /* SortViewController.m in Sources */,
 				386B75601E94C83E00081D09 /* ymCollectionViewCell.m in Sources */,
-				386B75621E94C83E00081D09 /* MergeViewController.m in Sources */,
 				38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */,
+				38E963F21E9C69FF002B99C2 /* MergeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
