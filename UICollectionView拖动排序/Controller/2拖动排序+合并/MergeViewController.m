@@ -127,7 +127,7 @@ static NSIndexPath *startIndexPath;   //起始路径
             cell.hidden = YES;
             CGPoint currentPoint = [longGesture locationInView:self.collectionView];
             [UIView animateWithDuration:0.25 animations:^{
-//                snapedView.transform = CGAffineTransformMakeScale(1.2f, 1.2f);
+                snapedView.transform = CGAffineTransformMakeScale(1.2f, 1.2f);
                 snapedView.center = CGPointMake(currentPoint.x, currentPoint.y);
             }];
         }
@@ -136,28 +136,6 @@ static NSIndexPath *startIndexPath;   //起始路径
             //当前手指位置 - 截图视图位置移动
             CGPoint currentPoint = [longGesture locationInView:self.collectionView];
             snapedView.center = CGPointMake(currentPoint.x, currentPoint.y);
-            for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
-                if ([self.collectionView indexPathForCell:cell] == oldIndexPath) {
-                    continue;
-                }
-                CGFloat space = sqrtf(pow(snapedView.center.x - cell.center.x, 2) + powf(snapedView.center.y - cell.center.y, 2));
-                currentIndexPath = [self.collectionView indexPathForCell:cell];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    if(space <= snapedView.bounds.size.width*3 / 4){
-                        [self.collectionView moveItemAtIndexPath:oldIndexPath toIndexPath:currentIndexPath];
-                        oldIndexPath = currentIndexPath;
-                    }
-                    if (space <= 10.0) {
-                        UICollectionViewCell *targetCell = [self.collectionView cellForItemAtIndexPath:currentIndexPath];//移动目标cell
-                        [UIView animateWithDuration:0.25 animations:^{
-                            snapedView.transform = CGAffineTransformMakeScale(0.8f, 0.8f);
-                        } completion:^(BOOL finished) {
-                            targetCell.contentView.backgroundColor = [UIColor grayColor];
-                        }];
-                        oldIndexPath = currentIndexPath;
-                    }
-                });
-            }
         }
             break;
         default:{//手势结束和其他状态
@@ -168,6 +146,7 @@ static NSIndexPath *startIndexPath;   //起始路径
             for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
                 //当前隐藏的cell就不需要交换了，直接continue
                 if ([self.collectionView indexPathForCell:cell] == oldIndexPath) {
+                    _moveType = kMoveTypeNone;
                     continue;
                 }
                 //计算中心距
@@ -196,6 +175,7 @@ static NSIndexPath *startIndexPath;   //起始路径
             }
             if (_moveType == kMoveTypeExchange) {
                 //移除数据插入到新的位置
+                [self.collectionView moveItemAtIndexPath:startIndexPath toIndexPath:currentIndexPath];
                 id obj = [_dataArray objectAtIndex:startIndexPath.item];
                 [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
                 [_dataArray insertObject:obj
@@ -226,7 +206,7 @@ static NSIndexPath *startIndexPath;   //起始路径
             //给截图视图一个动画移动到隐藏cell的新位置
             [UIView animateWithDuration:0.25 animations:^{
                 snapedView.center = targetCell.center;
-//                snapedView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+                snapedView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
             } completion:^(BOOL finished) {
                 //移除截图视图、显示隐藏的cell并开启交互
                 [snapedView removeFromSuperview];

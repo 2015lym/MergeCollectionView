@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "SortViewController.h"
 #import "MergeViewController.h"
-
+#import "TestViewController.h"
 @interface ViewController ()
 
 @end
@@ -58,7 +58,7 @@
 
 //gy测试用
 - (void)testVC {
-    MergeViewController *vc = [[MergeViewController alloc] init];
+    TestViewController *vc = [[TestViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end
