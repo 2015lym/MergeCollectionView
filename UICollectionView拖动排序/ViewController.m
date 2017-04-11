@@ -32,6 +32,12 @@
     [btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn2 addTarget:self action:@selector(mergeVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
+    
+    UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 75, 400, 150, 50)];
+    [btn3 setTitle:@"羔羊测试" forState:UIControlStateNormal];
+    [btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn3 addTarget:self action:@selector(testVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn3];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,4 +56,9 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+//gy测试用
+- (void)testVC {
+    MergeViewController *vc = [[MergeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end
