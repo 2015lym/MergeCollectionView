@@ -187,6 +187,7 @@ static NSIndexPath *startIndexPath;   //起始路径
                 }
                 //如果中心距离小于10就合并
                 if (space <= 10.0) {
+                    //如果拖动的是一个合并过的cell，则不执行二次合并
                     if (self.containerArray[startIndexPath.row].count==1) {
                         currentIndexPath = [self.collectionView indexPathForCell:cell];
                         _moveType = kMoveTypeMerge;
@@ -198,8 +199,8 @@ static NSIndexPath *startIndexPath;   //起始路径
                 }
             }
             if (_moveType == kMoveTypeExchange) {
-                [self.collectionView moveItemAtIndexPath:startIndexPath toIndexPath:currentIndexPath];
                 //移除数据插入到新的位置
+                [self.collectionView moveItemAtIndexPath:startIndexPath toIndexPath:currentIndexPath];
                 id obj = [_dataArray objectAtIndex:startIndexPath.item];
                 [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
                 [_dataArray insertObject:obj
@@ -220,6 +221,8 @@ static NSIndexPath *startIndexPath;   //起始路径
                 [_dataArray replaceObjectAtIndex:currentIndexPath.row withObject:@{kTitle:@"合成兽",kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
                 [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
                 [self.containerArray removeObjectAtIndex:startIndexPath.item];
+            }else if (_moveType == kMoveTypeNone){
+                currentIndexPath = startIndexPath;
             }
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:oldIndexPath];//原来隐藏的cell
             UICollectionViewCell *targetCell = [self.collectionView cellForItemAtIndexPath:currentIndexPath];//移动目标cell

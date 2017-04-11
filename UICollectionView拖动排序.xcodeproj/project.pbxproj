@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		385DA1B71E9CB49D00126F73 /* YMDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 385DA1B61E9CB49D00126F73 /* YMDetailView.m */; };
-		385DA1B91E9CB4B900126F73 /* YMDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 385DA1B81E9CB4B900126F73 /* YMDetailView.xib */; };
+		181999691E9CB5590010B98B /* SecondTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181999681E9CB5590010B98B /* SecondTestViewController.m */; };
+		1819996E1E9CC7150010B98B /* YMDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819996C1E9CC7150010B98B /* YMDetailView.m */; };
+		1819996F1E9CC7150010B98B /* YMDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1819996D1E9CC7150010B98B /* YMDetailView.xib */; };
 		386B75601E94C83E00081D09 /* ymCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 386B755A1E94C83E00081D09 /* ymCollectionViewCell.m */; };
 		386B75611E94C83E00081D09 /* ymCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 386B755B1E94C83E00081D09 /* ymCollectionViewCell.xib */; };
 		38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7DFA1E8DFA5B004C0A46 /* main.m */; };
@@ -23,9 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		385DA1B51E9CB49D00126F73 /* YMDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMDetailView.h; sourceTree = "<group>"; };
-		385DA1B61E9CB49D00126F73 /* YMDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMDetailView.m; sourceTree = "<group>"; };
-		385DA1B81E9CB4B900126F73 /* YMDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMDetailView.xib; sourceTree = "<group>"; };
+		181999671E9CB5590010B98B /* SecondTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondTestViewController.h; sourceTree = "<group>"; };
+		181999681E9CB5590010B98B /* SecondTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondTestViewController.m; sourceTree = "<group>"; };
+		1819996B1E9CC7150010B98B /* YMDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMDetailView.h; sourceTree = "<group>"; };
+		1819996C1E9CC7150010B98B /* YMDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMDetailView.m; sourceTree = "<group>"; };
+		1819996D1E9CC7150010B98B /* YMDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMDetailView.xib; sourceTree = "<group>"; };
 		386B75591E94C83E00081D09 /* ymCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ymCollectionViewCell.h; sourceTree = "<group>"; };
 		386B755A1E94C83E00081D09 /* ymCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ymCollectionViewCell.m; sourceTree = "<group>"; };
 		386B755B1E94C83E00081D09 /* ymCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ymCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -58,12 +61,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		383BB55B1E9CB4160026069F /* View */ = {
+		181999661E9CAFB70010B98B /* 4测试专用2 */ = {
 			isa = PBXGroup;
 			children = (
-				385DA1B51E9CB49D00126F73 /* YMDetailView.h */,
-				385DA1B61E9CB49D00126F73 /* YMDetailView.m */,
-				385DA1B81E9CB4B900126F73 /* YMDetailView.xib */,
+				181999671E9CB5590010B98B /* SecondTestViewController.h */,
+				181999681E9CB5590010B98B /* SecondTestViewController.m */,
+			);
+			path = "4测试专用2";
+			sourceTree = "<group>";
+		};
+		1819996A1E9CC7150010B98B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1819996B1E9CC7150010B98B /* YMDetailView.h */,
+				1819996C1E9CC7150010B98B /* YMDetailView.m */,
+				1819996D1E9CC7150010B98B /* YMDetailView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -71,11 +83,12 @@
 		386B75571E94C83E00081D09 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1819996A1E9CC7150010B98B /* View */,
+				181999661E9CAFB70010B98B /* 4测试专用2 */,
 				38E963EA1E9C69FF002B99C2 /* 1拖动排序 */,
 				38E963ED1E9C69FF002B99C2 /* 2拖动排序+合并 */,
 				38E963F01E9C69FF002B99C2 /* 3测试专用 */,
 				386B75581E94C83E00081D09 /* Cell */,
-				383BB55B1E9CB4160026069F /* View */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -218,7 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38AB7E091E8DFA5B004C0A46 /* LaunchScreen.storyboard in Resources */,
-				385DA1B91E9CB4B900126F73 /* YMDetailView.xib in Resources */,
+				1819996F1E9CC7150010B98B /* YMDetailView.xib in Resources */,
 				38AB7E061E8DFA5B004C0A46 /* Assets.xcassets in Resources */,
 				386B75611E94C83E00081D09 /* ymCollectionViewCell.xib in Resources */,
 				38AB7E041E8DFA5B004C0A46 /* Main.storyboard in Resources */,
@@ -232,12 +245,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1819996E1E9CC7150010B98B /* YMDetailView.m in Sources */,
+				181999691E9CB5590010B98B /* SecondTestViewController.m in Sources */,
 				38AB7E011E8DFA5B004C0A46 /* ViewController.m in Sources */,
 				38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */,
 				38E963F51E9C6A17002B99C2 /* TestViewController.m in Sources */,
 				38E963F11E9C69FF002B99C2 /* SortViewController.m in Sources */,
 				386B75601E94C83E00081D09 /* ymCollectionViewCell.m in Sources */,
-				385DA1B71E9CB49D00126F73 /* YMDetailView.m in Sources */,
 				38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */,
 				38E963F21E9C69FF002B99C2 /* MergeViewController.m in Sources */,
 			);
