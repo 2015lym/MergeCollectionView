@@ -7,16 +7,15 @@
 //
 
 #import "SortViewController.h"
-#import "ymCollectionViewCell.h"
+#import "MergeCollectionViewCell.h"
+#import "MergeCollectionView.h"
+#import "Config.h"
 
-#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
-
-#define ITEM_NUMBER 50
+static const int ITEM_NUMBER = 50;                     //item数量
 
 @interface SortViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) UICollectionView * collectionView;
+@property (nonatomic, strong) MergeCollectionView *collectionView;
 
 @end
 
@@ -44,41 +43,32 @@
 #pragma mark - ---------- 创建collectionView ----------
 - (void)createCollectionView {
     
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake((SCREENWIDTH-15) / 4, (SCREENWIDTH-15) / 4);
-    layout.minimumLineSpacing = 5;
-    layout.minimumInteritemSpacing = 5;
-    
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, SCREENWIDTH, SCREENHEIGHT - 20) collectionViewLayout:layout];
-    _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-    _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    _collectionView = [[MergeCollectionView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-    [_collectionView registerNib:[UINib nibWithNibName:@"ymCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ymCollectionViewCell"];
-    //此处给其增加长按手势，用此手势触发cell移动效果
-    UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
-    longGesture.minimumPressDuration = 0.5f;//触发长按事件时间为：秒
-    [_collectionView addGestureRecognizer:longGesture];
     [self.view addSubview:self.collectionView];
+    
+    /*
+     *  增加长按手势
+     *  触发长按事件时间为0.5秒
+     */
+    UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
+    longGesture.minimumPressDuration = 0.5f;
+    [_collectionView addGestureRecognizer:longGesture];
 }
 
-#pragma mark - ---------- Collection的数量 ----------
+#pragma mark - ---------- item数量 ----------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _dataArray.count;
 }
 
 #pragma mark - ---------- Cell的内容 ----------
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    ymCollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"ymCollectionViewCell" forIndexPath:indexPath];
+    MergeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MergeCollectionViewCell"
+                                                                              forIndexPath:indexPath];
     cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@", _dataArray[indexPath.row]];
     cell.imageView.image = [UIImage imageNamed:@"proper_logo"];
     return cell;
-}
-
-#pragma mark - ---------- 监听手势 ----------
-- (void)handlelongGesture:(UILongPressGestureRecognizer *)longGesture {
-    [self action:longGesture];
 }
 
 #pragma mark - ---------- 允许拖动 ----------
@@ -96,7 +86,7 @@
 }
 
 #pragma mark - ---------- 拖动手势 ----------
-- (void)action:(UILongPressGestureRecognizer *)longGesture {
+- (void)handlelongGesture:(UILongPressGestureRecognizer *)longGesture {
     switch (longGesture.state) {
         case UIGestureRecognizerStateBegan:{//手势开始
             //判断手势落点位置是否在Item上
@@ -126,6 +116,7 @@
     }
 }
 
+//以下方法可以全部注释，注释后失去长按放大效果
 #pragma mark - ---------- 允许长按 ----------
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
@@ -147,7 +138,5 @@
         selectedCell.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
     }];
 }
-
-
 
 @end

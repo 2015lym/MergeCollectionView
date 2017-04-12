@@ -1,5 +1,5 @@
 //
-//  YMDetailView.h
+//  MergeDetailView.h
 //  UICollectionView拖动排序
 //
 //  Created by Lym on 2017/4/11.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YMDetailView : UIView
+@interface MergeDetailView : UIView
 
 
 @end

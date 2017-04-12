@@ -1,36 +1,36 @@
 //
-//  YMDetailView.m
+//  MergeDetailView.m
 //  UICollectionView拖动排序
 //
 //  Created by Lym on 2017/4/11.
 //  Copyright © 2017年 Lym. All rights reserved.
 //
 
-#import "YMDetailView.h"
-#import "ymCollectionViewCell.h"
+#import "MergeDetailView.h"
+#import "MergeCollectionViewCell.h"
+#import "Config.h"
 
-#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
-
-#define ITEM_NUMBER 20
-
+static const int ITEM_NUMBER = 20;                      //item数量
 static NSString * const kImage = @"kImage";             //logo图片
 static NSString * const kTitle = @"kTitle";             //图片标题
-@interface YMDetailView ()<UICollectionViewDelegate, UICollectionViewDataSource>
+
+@interface MergeDetailView ()<UICollectionViewDelegate, UICollectionViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITextField *folderTitleTextField;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *dataArray;//collectionView数据源数组
-@property (nonatomic, strong) UICollectionView * containerCollectionView;
+
+
+@property (nonatomic, strong) NSMutableArray *dataArray;    //数据源数组
 
 @end
 
-@implementation YMDetailView
+@implementation MergeDetailView
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    _folderTitleTextField.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
-    
+    _folderTitleTextField.backgroundColor = TEXTFIELD_COLOR;
+
     [self createCollectionView];
     
     _dataArray = [NSMutableArray array];
@@ -53,7 +53,7 @@ static NSString * const kTitle = @"kTitle";             //图片标题
 - (void)createCollectionView {
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(SCREENWIDTH / 4, SCREENWIDTH / 4);
+    layout.itemSize = CGSizeMake(SCREEN_WIDTH / 4, SCREEN_WIDTH / 4);
     layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
@@ -65,7 +65,7 @@ static NSString * const kTitle = @"kTitle";             //图片标题
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [_collectionView registerNib:[UINib nibWithNibName:@"ymCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ymCollectionViewCell"];
+    [_collectionView registerNib:[UINib nibWithNibName:@"MergeCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"MergeCollectionViewCell"];
     //此处给其增加长按手势，用此手势触发cell移动效果
     UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
     longGesture.minimumPressDuration = 0.5f;//触发长按事件时间为：秒
@@ -81,7 +81,7 @@ static NSString * const kTitle = @"kTitle";             //图片标题
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ymCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ymCollectionViewCell" forIndexPath:indexPath];
+    MergeCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MergeCollectionViewCell" forIndexPath:indexPath];
     cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@",self.dataArray[indexPath.item][kTitle]];
     cell.imageView.image = self.dataArray[indexPath.item][kImage];
     return cell;

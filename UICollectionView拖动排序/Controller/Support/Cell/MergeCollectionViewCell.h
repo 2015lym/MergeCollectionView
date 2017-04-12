@@ -1,5 +1,5 @@
 //
-//  ymCollectionViewCell.h
+//  MergeCollectionViewCell.h
 //  UICollectionView拖动排序
 //
 //  Created by Lym on 2017/3/31.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ymCollectionViewCell : UICollectionViewCell
+@interface MergeCollectionViewCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 

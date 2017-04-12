@@ -8,16 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		181999691E9CB5590010B98B /* SecondTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181999681E9CB5590010B98B /* SecondTestViewController.m */; };
-		1819996E1E9CC7150010B98B /* YMDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1819996C1E9CC7150010B98B /* YMDetailView.m */; };
-		1819996F1E9CC7150010B98B /* YMDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1819996D1E9CC7150010B98B /* YMDetailView.xib */; };
-		386B75601E94C83E00081D09 /* ymCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 386B755A1E94C83E00081D09 /* ymCollectionViewCell.m */; };
-		386B75611E94C83E00081D09 /* ymCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 386B755B1E94C83E00081D09 /* ymCollectionViewCell.xib */; };
 		38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7DFA1E8DFA5B004C0A46 /* main.m */; };
 		38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7DFD1E8DFA5B004C0A46 /* AppDelegate.m */; };
 		38AB7E011E8DFA5B004C0A46 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7E001E8DFA5B004C0A46 /* ViewController.m */; };
 		38AB7E041E8DFA5B004C0A46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E021E8DFA5B004C0A46 /* Main.storyboard */; };
 		38AB7E061E8DFA5B004C0A46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E051E8DFA5B004C0A46 /* Assets.xcassets */; };
 		38AB7E091E8DFA5B004C0A46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38AB7E071E8DFA5B004C0A46 /* LaunchScreen.storyboard */; };
+		38BEF53D1E9DB96E00798528 /* MergeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BEF5361E9DB96E00798528 /* MergeCollectionViewCell.m */; };
+		38BEF53E1E9DB96E00798528 /* MergeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BEF5371E9DB96E00798528 /* MergeCollectionViewCell.xib */; };
+		38BEF53F1E9DB96E00798528 /* MergeDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BEF53B1E9DB96E00798528 /* MergeDetailView.m */; };
+		38BEF5401E9DB96E00798528 /* MergeDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BEF53C1E9DB96E00798528 /* MergeDetailView.xib */; };
+		38BEF5461E9DBDCB00798528 /* MergeCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BEF5451E9DBDCB00798528 /* MergeCollectionView.m */; };
 		38E963F11E9C69FF002B99C2 /* SortViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E963EC1E9C69FF002B99C2 /* SortViewController.m */; };
 		38E963F21E9C69FF002B99C2 /* MergeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E963EF1E9C69FF002B99C2 /* MergeViewController.m */; };
 		38E963F51E9C6A17002B99C2 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E963F41E9C6A17002B99C2 /* TestViewController.m */; };
@@ -26,12 +27,6 @@
 /* Begin PBXFileReference section */
 		181999671E9CB5590010B98B /* SecondTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondTestViewController.h; sourceTree = "<group>"; };
 		181999681E9CB5590010B98B /* SecondTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondTestViewController.m; sourceTree = "<group>"; };
-		1819996B1E9CC7150010B98B /* YMDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMDetailView.h; sourceTree = "<group>"; };
-		1819996C1E9CC7150010B98B /* YMDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMDetailView.m; sourceTree = "<group>"; };
-		1819996D1E9CC7150010B98B /* YMDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMDetailView.xib; sourceTree = "<group>"; };
-		386B75591E94C83E00081D09 /* ymCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ymCollectionViewCell.h; sourceTree = "<group>"; };
-		386B755A1E94C83E00081D09 /* ymCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ymCollectionViewCell.m; sourceTree = "<group>"; };
-		386B755B1E94C83E00081D09 /* ymCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ymCollectionViewCell.xib; sourceTree = "<group>"; };
 		38AB7DF61E8DFA5B004C0A46 /* UICollectionView拖动排序.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UICollectionView拖动排序.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AB7DFA1E8DFA5B004C0A46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		38AB7DFC1E8DFA5B004C0A46 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,6 +37,15 @@
 		38AB7E051E8DFA5B004C0A46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38AB7E081E8DFA5B004C0A46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38AB7E0A1E8DFA5B004C0A46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38BEF5351E9DB96E00798528 /* MergeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeCollectionViewCell.h; sourceTree = "<group>"; };
+		38BEF5361E9DB96E00798528 /* MergeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeCollectionViewCell.m; sourceTree = "<group>"; };
+		38BEF5371E9DB96E00798528 /* MergeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MergeCollectionViewCell.xib; sourceTree = "<group>"; };
+		38BEF53A1E9DB96E00798528 /* MergeDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeDetailView.h; sourceTree = "<group>"; };
+		38BEF53B1E9DB96E00798528 /* MergeDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeDetailView.m; sourceTree = "<group>"; };
+		38BEF53C1E9DB96E00798528 /* MergeDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MergeDetailView.xib; sourceTree = "<group>"; };
+		38BEF5431E9DBAB400798528 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		38BEF5441E9DBDCB00798528 /* MergeCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeCollectionView.h; sourceTree = "<group>"; };
+		38BEF5451E9DBDCB00798528 /* MergeCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeCollectionView.m; sourceTree = "<group>"; };
 		38E963EB1E9C69FF002B99C2 /* SortViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortViewController.h; sourceTree = "<group>"; };
 		38E963EC1E9C69FF002B99C2 /* SortViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortViewController.m; sourceTree = "<group>"; };
 		38E963EE1E9C69FF002B99C2 /* MergeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeViewController.h; sourceTree = "<group>"; };
@@ -70,37 +74,16 @@
 			path = "4测试专用2";
 			sourceTree = "<group>";
 		};
-		1819996A1E9CC7150010B98B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1819996B1E9CC7150010B98B /* YMDetailView.h */,
-				1819996C1E9CC7150010B98B /* YMDetailView.m */,
-				1819996D1E9CC7150010B98B /* YMDetailView.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		386B75571E94C83E00081D09 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				38BEF5331E9DB96E00798528 /* Support */,
 				38E963EA1E9C69FF002B99C2 /* 1拖动排序 */,
 				38E963ED1E9C69FF002B99C2 /* 2拖动排序+合并 */,
 				38E963F01E9C69FF002B99C2 /* 3测试专用 */,
 				181999661E9CAFB70010B98B /* 4测试专用2 */,
-				1819996A1E9CC7150010B98B /* View */,
-				386B75581E94C83E00081D09 /* Cell */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		386B75581E94C83E00081D09 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				386B75591E94C83E00081D09 /* ymCollectionViewCell.h */,
-				386B755A1E94C83E00081D09 /* ymCollectionViewCell.m */,
-				386B755B1E94C83E00081D09 /* ymCollectionViewCell.xib */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		38AB7DED1E8DFA5B004C0A46 = {
@@ -142,6 +125,38 @@
 				38AB7DFA1E8DFA5B004C0A46 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		38BEF5331E9DB96E00798528 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				38BEF5431E9DBAB400798528 /* Config.h */,
+				38BEF5341E9DB96E00798528 /* Cell */,
+				38BEF5391E9DB96E00798528 /* View */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		38BEF5341E9DB96E00798528 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				38BEF5351E9DB96E00798528 /* MergeCollectionViewCell.h */,
+				38BEF5361E9DB96E00798528 /* MergeCollectionViewCell.m */,
+				38BEF5371E9DB96E00798528 /* MergeCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		38BEF5391E9DB96E00798528 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				38BEF5441E9DBDCB00798528 /* MergeCollectionView.h */,
+				38BEF5451E9DBDCB00798528 /* MergeCollectionView.m */,
+				38BEF53A1E9DB96E00798528 /* MergeDetailView.h */,
+				38BEF53B1E9DB96E00798528 /* MergeDetailView.m */,
+				38BEF53C1E9DB96E00798528 /* MergeDetailView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		38E963EA1E9C69FF002B99C2 /* 1拖动排序 */ = {
@@ -202,7 +217,7 @@
 				TargetAttributes = {
 					38AB7DF51E8DFA5B004C0A46 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = L7P6N237GX;
+						DevelopmentTeam = PT38H38E4T;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -231,9 +246,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				38AB7E091E8DFA5B004C0A46 /* LaunchScreen.storyboard in Resources */,
-				1819996F1E9CC7150010B98B /* YMDetailView.xib in Resources */,
+				38BEF5401E9DB96E00798528 /* MergeDetailView.xib in Resources */,
 				38AB7E061E8DFA5B004C0A46 /* Assets.xcassets in Resources */,
-				386B75611E94C83E00081D09 /* ymCollectionViewCell.xib in Resources */,
+				38BEF53E1E9DB96E00798528 /* MergeCollectionViewCell.xib in Resources */,
 				38AB7E041E8DFA5B004C0A46 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,14 +260,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1819996E1E9CC7150010B98B /* YMDetailView.m in Sources */,
+				38BEF53F1E9DB96E00798528 /* MergeDetailView.m in Sources */,
 				181999691E9CB5590010B98B /* SecondTestViewController.m in Sources */,
 				38AB7E011E8DFA5B004C0A46 /* ViewController.m in Sources */,
+				38BEF5461E9DBDCB00798528 /* MergeCollectionView.m in Sources */,
 				38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */,
 				38E963F51E9C6A17002B99C2 /* TestViewController.m in Sources */,
 				38E963F11E9C69FF002B99C2 /* SortViewController.m in Sources */,
-				386B75601E94C83E00081D09 /* ymCollectionViewCell.m in Sources */,
 				38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */,
+				38BEF53D1E9DB96E00798528 /* MergeCollectionViewCell.m in Sources */,
 				38E963F21E9C69FF002B99C2 /* MergeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,7 +390,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = L7P6N237GX;
+				DEVELOPMENT_TEAM = PT38H38E4T;
 				INFOPLIST_FILE = "UICollectionView拖动排序/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -388,7 +404,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = L7P6N237GX;
+				DEVELOPMENT_TEAM = PT38H38E4T;
 				INFOPLIST_FILE = "UICollectionView拖动排序/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

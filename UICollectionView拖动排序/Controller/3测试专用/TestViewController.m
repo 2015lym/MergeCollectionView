@@ -7,16 +7,14 @@
 //
 
 #import "TestViewController.h"
-#import "ymCollectionViewCell.h"
+#import "MergeCollectionViewCell.h"
+#import "MergeCollectionView.h"
+#import "Config.h"
 
-#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
-#define WIDTH_5S_SCALE 320.0 * [UIScreen mainScreen].bounds.size.width
-
-#define ITEM_NUMBER 10
-
+static const int ITEM_NUMBER = 10;                     //item数量
 static NSString * const kImage = @"kImage";             //logo图片
 static NSString * const kTitle = @"kTitle";             //图片标题
+
 typedef NS_ENUM(NSInteger, kMoveType){
     kMoveTypeNone,
     kMoveTypeExchange,
@@ -25,8 +23,7 @@ typedef NS_ENUM(NSInteger, kMoveType){
 @interface TestViewController ()<UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;//collectionView数据源数组
 @property (nonatomic, strong) NSMutableArray<NSArray *> *containerArray;//记录包含合并的数组
-@property (nonatomic, strong) UICollectionView * collectionView;
-@property (nonatomic, strong) UICollectionView * containerCollectionView;
+@property (nonatomic, strong) MergeCollectionView * collectionView;
 @property (nonatomic, assign) kMoveType moveType;//移动方式，移动or合并
 
 
@@ -62,40 +59,37 @@ typedef NS_ENUM(NSInteger, kMoveType){
 #pragma mark - ---------- 创建collectionView ----------
 - (void)createCollectionView {
     
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(SCREENWIDTH / 4, SCREENWIDTH / 4);
-    layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    layout.minimumLineSpacing = 0;
-    layout.minimumInteritemSpacing = 0;
-    
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, SCREENWIDTH, SCREENHEIGHT - 20) collectionViewLayout:layout];
-    _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-    _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    _collectionView = [[MergeCollectionView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-    [_collectionView registerNib:[UINib nibWithNibName:@"ymCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ymCollectionViewCell"];
-    //此处给其增加长按手势，用此手势触发cell移动效果
-    UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
-    longGesture.minimumPressDuration = 0.5f;//触发长按事件时间为：秒
-    [_collectionView addGestureRecognizer:longGesture];
     [self.view addSubview:self.collectionView];
+    
+    /*
+     *  增加长按手势
+     *  触发长按事件时间为0.5秒
+     */
+    UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
+    longGesture.minimumPressDuration = 0.5f;
+    [_collectionView addGestureRecognizer:longGesture];
 }
 
-#pragma mark - delegate
+#pragma mark - ---------- item数量 ----------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.dataArray.count;
 }
 
+#pragma mark - ---------- Cell的内容 ----------
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ymCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ymCollectionViewCell" forIndexPath:indexPath];
+    MergeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MergeCollectionViewCell"
+                                                                              forIndexPath:indexPath];
     cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@",self.dataArray[indexPath.item][kTitle]];
     cell.imageView.image = self.dataArray[indexPath.item][kImage];
     return cell;
 }
 
+#pragma mark - ---------- Cell的点击事件 ----------
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
 }
@@ -105,17 +99,12 @@ typedef NS_ENUM(NSInteger, kMoveType){
     return YES;
 }
 
-#pragma mark - ---------- 监听手势 ----------
-- (void)handlelongGesture:(UILongPressGestureRecognizer *)longGesture {
-    [self action:longGesture];
-}
-
 #pragma mark - ---------- 拖动手势 ----------
 static UIView *snapedView;              //截图快照
 static NSIndexPath *currentIndexPath;   //当前路径
 static NSIndexPath *oldIndexPath;       //旧路径
 static NSIndexPath *startIndexPath;   //起始路径
-- (void)action:(UILongPressGestureRecognizer *)longGesture{
+- (void)handlelongGesture:(UILongPressGestureRecognizer *)longGesture{
     switch (longGesture.state) {
         case UIGestureRecognizerStateBegan:{//手势开始
             //判断手势落点位置是否在Item上
@@ -251,7 +240,7 @@ static NSIndexPath *startIndexPath;   //起始路径
 #pragma mark - ---------- 合成新图标 ----------
 - (UIImage *)setMergeImageWithImageArray:(NSArray *)imageArray{
     //新图标大小
-    CGSize size = CGSizeMake(SCREENWIDTH/4-40, SCREENWIDTH/4-40);
+    CGSize size = CGSizeMake(SCREEN_WIDTH/4-40, SCREEN_WIDTH/4-40);
     UIGraphicsBeginImageContext(size);
     //从数组中取图片进行拼接
     [imageArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {

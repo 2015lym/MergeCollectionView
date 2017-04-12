@@ -19,6 +19,8 @@
 #pragma mark - ---------- 生命周期 ----------
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"Merge Test";
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 50, 200, 100, 50)];
