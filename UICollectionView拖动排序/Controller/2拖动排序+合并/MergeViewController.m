@@ -102,9 +102,9 @@ typedef NS_ENUM(NSInteger, kMoveType){
         [self setGrayView];
         UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
         MergeDetailView *detailView = [[NSBundle mainBundle] loadNibNamed:@"MergeDetailView" owner:self options:nil].lastObject;
-        detailView.frame = CGRectMake(0,
+        detailView.frame = CGRectMake(SCREEN_WIDTH/8,
                                       (SCREEN_HEIGHT - 3 * SCREEN_WIDTH/4)/2 - 50,
-                                      SCREEN_WIDTH,
+                                      3 * SCREEN_WIDTH/4 + 1,
                                       3 * SCREEN_WIDTH/4 + 100);
         detailView.backgroundColor = [UIColor clearColor];
         detailView.folderTitleTextField.text = _dataArray[indexPath.item][@"kTitle"];
@@ -116,9 +116,9 @@ typedef NS_ENUM(NSInteger, kMoveType){
         };
         [_grayView addSubview:detailView];
         [detailView openCell: [self.view convertRect:cell.frame toView:detailView]];
-//        cell.hidden = YES;
+        cell.hidden = YES;
         detailView.close = ^(void){
-//            cell.hidden = NO;
+            cell.hidden = NO;
         };
     }
 }
