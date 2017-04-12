@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger, kMoveType){
     _dataArray = [NSMutableArray array];
     //添加数据源
     for (int i = 1; i <= ITEM_NUMBER; i++) {
-        NSString *str = [NSString stringWithFormat:@"%d", i];
+        NSString *str = [NSString stringWithFormat:@"请假审批%d", i];
         UIImage *image = [UIImage imageNamed:@"proper_logo"];
         NSDictionary *dic = @{kImage:image,kTitle:str};
         [_dataArray addObject:dic];
@@ -91,11 +91,7 @@ typedef NS_ENUM(NSInteger, kMoveType){
 {
     MergeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MergeCollectionViewCell"
                                                                               forIndexPath:indexPath];
-    if (_containerArray[indexPath.item].count == 1) {
-        cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@",self.dataArray[indexPath.item][kTitle]];
-    } else {
-        cell.contentLabel.text = self.dataArray[indexPath.item][kTitle];
-    }
+    cell.contentLabel.text = self.dataArray[indexPath.item][kTitle];
     cell.imageView.image = self.dataArray[indexPath.item][kImage];
     return cell;
 }
@@ -104,6 +100,7 @@ typedef NS_ENUM(NSInteger, kMoveType){
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (_containerArray[indexPath.item].count != 1) {
         [self setGrayView];
+        UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
         MergeDetailView *detailView = [[NSBundle mainBundle] loadNibNamed:@"MergeDetailView" owner:self options:nil].lastObject;
         detailView.frame = CGRectMake(SCREEN_WIDTH/8,
                                       (SCREEN_HEIGHT - 3 * SCREEN_WIDTH/4)/2 - 50,
@@ -114,10 +111,15 @@ typedef NS_ENUM(NSInteger, kMoveType){
         detailView.dataArray = [NSMutableArray arrayWithArray:self.containerArray[indexPath.item]];
         __weak typeof(self) weakSelf = self;
         detailView.folderTitle = ^(NSString *title) {
-            [_dataArray replaceObjectAtIndex:currentIndexPath.item withObject:@{kTitle:title,kImage:_dataArray[currentIndexPath.item][@"kImage"]}];
+            [_dataArray replaceObjectAtIndex:indexPath.item withObject:@{kTitle:title,kImage:_dataArray[indexPath.item][@"kImage"]}];
             [weakSelf.collectionView reloadData];
         };
         [_grayView addSubview:detailView];
+        [detailView openCell: [self.view convertRect:cell.frame toView:detailView]];
+        cell.hidden = YES;
+        detailView.close = ^(void){
+            cell.hidden = NO;
+        };
     }
 }
 
@@ -126,13 +128,6 @@ typedef NS_ENUM(NSInteger, kMoveType){
     _grayView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     _grayView.backgroundColor = GRAYVIEW_COLOR;
     [[UIApplication sharedApplication].keyWindow addSubview:_grayView];
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissContactView)];
-    [_grayView addGestureRecognizer:tapGesture];
-}
-
-- (void)dismissContactView {
-    [_grayView removeFromSuperview];
 }
 
 #pragma mark - ---------- 拖动手势 ----------
@@ -141,6 +136,7 @@ static NSIndexPath *currentIndexPath;   //当前路径
 static NSIndexPath *oldIndexPath;       //旧路径
 static NSIndexPath *startIndexPath;   //起始路径
 - (void)handlelongGesture:(UILongPressGestureRecognizer *)longGesture{
+    _moveType = kMoveTypeNone;
     switch (longGesture.state) {
         case UIGestureRecognizerStateBegan:{//手势开始
             //判断手势落点位置是否在Item上
@@ -178,7 +174,6 @@ static NSIndexPath *startIndexPath;   //起始路径
             for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
                 //当前隐藏的cell就不需要交换了，直接continue
                 if ([self.collectionView indexPathForCell:cell] == oldIndexPath) {
-                    _moveType = kMoveTypeNone;
                     continue;
                 }
                 //计算中心距
@@ -193,7 +188,7 @@ static NSIndexPath *startIndexPath;   //起始路径
                     oldIndexPath = currentIndexPath;
                 }
                 //如果中心距离小于10就合并
-                if (space <= 10.0) {
+                if (space <= 20.0) {
                     //如果拖动的是一个合并过的cell，则不执行二次合并
                     if (self.containerArray[startIndexPath.item].count==1) {
                         currentIndexPath = [self.collectionView indexPathForCell:cell];
@@ -265,11 +260,11 @@ static NSIndexPath *startIndexPath;   //起始路径
     //从数组中取图片进行拼接
     [imageArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIImage *image = obj[kImage];
-        [image drawInRect:CGRectMake(5/WIDTH_5S_SCALE + 15/WIDTH_5S_SCALE*(idx%2),
-                                     5/WIDTH_5S_SCALE + 15/WIDTH_5S_SCALE*(idx/2),
+        [image drawInRect:CGRectMake(15/WIDTH_5S_SCALE*(idx%3),
+                                     15/WIDTH_5S_SCALE*(idx/3),
                                      10/WIDTH_5S_SCALE,
                                      10/WIDTH_5S_SCALE)];
-        if (idx>=3) {
+        if (idx>=8) {
             *stop = YES;
         }
     }];

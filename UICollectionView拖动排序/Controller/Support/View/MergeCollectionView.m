@@ -12,7 +12,6 @@
 @implementation MergeCollectionView
 
 - (instancetype)initWithFrame:(CGRect)frame {
-    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake((SCREEN_WIDTH-15) / 4, (SCREEN_WIDTH-15) / 4);
     layout.minimumLineSpacing = 5;
