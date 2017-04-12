@@ -16,7 +16,6 @@ static const int ITEM_NUMBER = 50;                     //item数量
 @interface SortViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) MergeCollectionView *collectionView;
-
 @end
 
 @implementation SortViewController

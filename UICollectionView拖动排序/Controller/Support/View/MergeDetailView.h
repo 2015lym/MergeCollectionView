@@ -16,4 +16,8 @@
 
 @property (nonatomic, copy) void(^folderTitle)(NSString *title);
 
+@property (nonatomic, copy) void (^close)(void);
+
+- (void)openCell:(CGRect )cellFrame;
+
 @end
