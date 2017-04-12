@@ -91,7 +91,11 @@ typedef NS_ENUM(NSInteger, kMoveType){
 {
     MergeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MergeCollectionViewCell"
                                                                               forIndexPath:indexPath];
-    cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@",self.dataArray[indexPath.item][kTitle]];
+    if (_containerArray[indexPath.item].count == 1) {
+        cell.contentLabel.text = [NSString stringWithFormat:@"请假审批%@",self.dataArray[indexPath.item][kTitle]];
+    } else {
+        cell.contentLabel.text = self.dataArray[indexPath.item][kTitle];
+    }
     cell.imageView.image = self.dataArray[indexPath.item][kImage];
     return cell;
 }
@@ -106,6 +110,13 @@ typedef NS_ENUM(NSInteger, kMoveType){
                                       3 * SCREEN_WIDTH/4 + 1,
                                       3 * SCREEN_WIDTH/4 + 100);
         detailView.backgroundColor = [UIColor clearColor];
+        detailView.folderTitleTextField.text = _dataArray[indexPath.item][@"kTitle"];
+        detailView.dataArray = [NSMutableArray arrayWithArray:self.containerArray[indexPath.item]];
+        __weak typeof(self) weakSelf = self;
+        detailView.folderTitle = ^(NSString *title) {
+            [_dataArray replaceObjectAtIndex:currentIndexPath.item withObject:@{kTitle:title,kImage:_dataArray[currentIndexPath.item][@"kImage"]}];
+            [weakSelf.collectionView reloadData];
+        };
         [_grayView addSubview:detailView];
     }
 }
@@ -184,7 +195,7 @@ static NSIndexPath *startIndexPath;   //起始路径
                 //如果中心距离小于10就合并
                 if (space <= 10.0) {
                     //如果拖动的是一个合并过的cell，则不执行二次合并
-                    if (self.containerArray[startIndexPath.row].count==1) {
+                    if (self.containerArray[startIndexPath.item].count==1) {
                         currentIndexPath = [self.collectionView indexPathForCell:cell];
                         _moveType = kMoveTypeMerge;
                         //更改移动后的起始indexPath，用于后面获取隐藏的cell,是移动前的位置
@@ -209,12 +220,18 @@ static NSIndexPath *startIndexPath;   //起始路径
             }else if (_moveType == kMoveTypeMerge){
                 //设置合并后的新数组
                 NSMutableArray *mergeArray = [[NSMutableArray alloc]init];
-                [self.containerArray[currentIndexPath.row] enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [self.containerArray[currentIndexPath.item] enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     [mergeArray addObject:obj];
                 }];
                 [mergeArray addObject:self.containerArray[startIndexPath.item][0]];
                 [self.containerArray replaceObjectAtIndex:currentIndexPath.item withObject:mergeArray];
-                [_dataArray replaceObjectAtIndex:currentIndexPath.row withObject:@{kTitle:@"合成兽",kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
+                
+                if (_containerArray[currentIndexPath.item].count == 2) {
+                    [_dataArray replaceObjectAtIndex:currentIndexPath.item withObject:@{kTitle:@"文件夹",kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
+                } else {
+                    [_dataArray replaceObjectAtIndex:currentIndexPath.item withObject:@{kTitle:_dataArray[currentIndexPath.item][@"kTitle"], kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
+                }
+
                 [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
                 [self.containerArray removeObjectAtIndex:startIndexPath.item];
             }else if (_moveType == kMoveTypeNone){

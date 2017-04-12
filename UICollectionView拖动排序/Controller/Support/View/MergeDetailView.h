@@ -10,5 +10,10 @@
 
 @interface MergeDetailView : UIView
 
+@property (weak, nonatomic) IBOutlet UITextField *folderTitleTextField;
+
+@property (nonatomic, strong) NSMutableArray *dataArray;    //数据源数组
+
+@property (nonatomic, copy) void(^folderTitle)(NSString *title);
 
 @end

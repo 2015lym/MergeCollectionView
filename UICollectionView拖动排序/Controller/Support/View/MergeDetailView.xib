@@ -52,7 +52,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="collectionView" destination="USX-iw-5DA" id="Kyn-GR-s0N"/>
-                <outlet property="folderTitleTextField" destination="zMV-Ss-lC4" id="nFu-Oh-5c0"/>
+                <outlet property="folderTitleTextField" destination="zMV-Ss-lC4" id="Izc-jS-bGZ"/>
             </connections>
         </view>
     </objects>

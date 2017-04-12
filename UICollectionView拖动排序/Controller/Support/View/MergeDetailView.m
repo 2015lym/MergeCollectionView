@@ -10,17 +10,12 @@
 #import "MergeCollectionViewCell.h"
 #import "Config.h"
 
-static const int ITEM_NUMBER = 20;                      //item数量
 static NSString * const kImage = @"kImage";             //logo图片
 static NSString * const kTitle = @"kTitle";             //图片标题
 
-@interface MergeDetailView ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface MergeDetailView ()<UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *folderTitleTextField;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
-
-@property (nonatomic, strong) NSMutableArray *dataArray;    //数据源数组
 
 @end
 
@@ -30,17 +25,10 @@ static NSString * const kTitle = @"kTitle";             //图片标题
     [super awakeFromNib];
     
     _folderTitleTextField.backgroundColor = TEXTFIELD_COLOR;
-
+    _folderTitleTextField.delegate = self;
+    
     [self createCollectionView];
     
-    _dataArray = [NSMutableArray array];
-    //添加数据源
-    for (int i = 1; i <= ITEM_NUMBER; i++) {
-        NSString *str = [NSString stringWithFormat:@"%d", i];
-        UIImage *image = [UIImage imageNamed:@"proper_logo"];
-        NSDictionary *dic = @{kImage:image,kTitle:str};
-        [_dataArray addObject:dic];
-    }
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -57,7 +45,7 @@ static NSString * const kTitle = @"kTitle";             //图片标题
     layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     _collectionView.collectionViewLayout = layout;
     _collectionView.delegate = self;
@@ -177,4 +165,8 @@ static NSIndexPath *startIndexPath;   //起始路径
     }
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    textField.text = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    self.folderTitle(textField.text);
+}
 @end
