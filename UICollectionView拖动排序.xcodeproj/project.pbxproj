@@ -83,11 +83,11 @@
 		386B75571E94C83E00081D09 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1819996A1E9CC7150010B98B /* View */,
-				181999661E9CAFB70010B98B /* 4测试专用2 */,
 				38E963EA1E9C69FF002B99C2 /* 1拖动排序 */,
 				38E963ED1E9C69FF002B99C2 /* 2拖动排序+合并 */,
 				38E963F01E9C69FF002B99C2 /* 3测试专用 */,
+				181999661E9CAFB70010B98B /* 4测试专用2 */,
+				1819996A1E9CC7150010B98B /* View */,
 				386B75581E94C83E00081D09 /* Cell */,
 			);
 			path = Controller;

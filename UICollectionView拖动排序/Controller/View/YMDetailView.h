@@ -10,4 +10,5 @@
 
 @interface YMDetailView : UIView
 
+
 @end

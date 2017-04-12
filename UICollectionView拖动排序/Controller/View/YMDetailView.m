@@ -12,11 +12,11 @@
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
 
-#define ITEM_NUMBER 10
+#define ITEM_NUMBER 20
 
 static NSString * const kImage = @"kImage";             //logo图片
 static NSString * const kTitle = @"kTitle";             //图片标题
-@interface YMDetailView ()
+@interface YMDetailView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *folderTitleTextField;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *dataArray;//collectionView数据源数组
@@ -57,8 +57,11 @@ static NSString * const kTitle = @"kTitle";             //图片标题
     layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     _collectionView.collectionViewLayout = layout;
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
