@@ -55,10 +55,9 @@ typedef NS_ENUM(NSInteger, kMoveType){
     //测试
     TestJson *json = [[TestJson alloc] init];
     AppModel *model = [AppModel yy_modelWithDictionary:json.dic];
-    AppList *list = model.rows[0];
-    NSLog(@"%@", list.title);
-    NSLog(@"%@", list.serviceName);
-    
+    AppList *list = model.rows[1];
+    AppFolderList *flist = list.rows[1];
+    AppFolderListData *fdata = flist.data;
     
     
     

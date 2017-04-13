@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "YYModel.h"
 
 
 @protocol AppFolderListData <NSObject>
@@ -42,7 +42,7 @@
 @property (nonatomic, copy) NSString *bussinessId;
 @property (nonatomic, copy) NSString *defaultTab;
 
-@property (nonatomic, strong) NSArray<AppFolderListData> *data;
+@property (nonatomic, strong) AppFolderListData *data;
 
 @end
 

@@ -8,6 +8,21 @@
 
 #import "AppModel.h"
 
+@implementation AppFolderListData
+
+@end
+
+
+@implementation AppFolderList
+
+@end
+
+
+@implementation AppList
+
+@end
+
+
 @implementation AppModel
 
 @end
