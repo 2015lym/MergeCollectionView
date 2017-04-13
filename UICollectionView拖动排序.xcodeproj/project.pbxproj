@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		181999691E9CB5590010B98B /* SecondTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181999681E9CB5590010B98B /* SecondTestViewController.m */; };
+		381308A01E9F453600A512F0 /* TestJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 3813089F1E9F453600A512F0 /* TestJson.m */; };
+		385D9A4A1E9F17940071A95A /* Test3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385D9A491E9F17940071A95A /* Test3ViewController.m */; };
+		385D9A511E9F183E0071A95A /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 385D9A4D1E9F183E0071A95A /* NSObject+YYModel.m */; };
+		385D9A521E9F183E0071A95A /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 385D9A4F1E9F183E0071A95A /* YYClassInfo.m */; };
+		385D9A581E9F19180071A95A /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 385D9A571E9F19180071A95A /* AppModel.m */; };
 		38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7DFA1E8DFA5B004C0A46 /* main.m */; };
 		38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7DFD1E8DFA5B004C0A46 /* AppDelegate.m */; };
 		38AB7E011E8DFA5B004C0A46 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7E001E8DFA5B004C0A46 /* ViewController.m */; };
@@ -27,6 +32,17 @@
 /* Begin PBXFileReference section */
 		181999671E9CB5590010B98B /* SecondTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondTestViewController.h; sourceTree = "<group>"; };
 		181999681E9CB5590010B98B /* SecondTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondTestViewController.m; sourceTree = "<group>"; };
+		3813089E1E9F453600A512F0 /* TestJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestJson.h; sourceTree = "<group>"; };
+		3813089F1E9F453600A512F0 /* TestJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestJson.m; sourceTree = "<group>"; };
+		385D9A481E9F17940071A95A /* Test3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test3ViewController.h; sourceTree = "<group>"; };
+		385D9A491E9F17940071A95A /* Test3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test3ViewController.m; sourceTree = "<group>"; };
+		385D9A4C1E9F183E0071A95A /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		385D9A4D1E9F183E0071A95A /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		385D9A4E1E9F183E0071A95A /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
+		385D9A4F1E9F183E0071A95A /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		385D9A501E9F183E0071A95A /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		385D9A561E9F19180071A95A /* AppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
+		385D9A571E9F19180071A95A /* AppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
 		38AB7DF61E8DFA5B004C0A46 /* UICollectionView拖动排序.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UICollectionView拖动排序.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AB7DFA1E8DFA5B004C0A46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		38AB7DFC1E8DFA5B004C0A46 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -74,6 +90,32 @@
 			path = "4测试专用2";
 			sourceTree = "<group>";
 		};
+		385D9A471E9F0DDC0071A95A /* 5YYModel测试 */ = {
+			isa = PBXGroup;
+			children = (
+				385D9A4B1E9F183E0071A95A /* YYModel */,
+				385D9A481E9F17940071A95A /* Test3ViewController.h */,
+				385D9A491E9F17940071A95A /* Test3ViewController.m */,
+				385D9A561E9F19180071A95A /* AppModel.h */,
+				385D9A571E9F19180071A95A /* AppModel.m */,
+				3813089E1E9F453600A512F0 /* TestJson.h */,
+				3813089F1E9F453600A512F0 /* TestJson.m */,
+			);
+			path = "5YYModel测试";
+			sourceTree = "<group>";
+		};
+		385D9A4B1E9F183E0071A95A /* YYModel */ = {
+			isa = PBXGroup;
+			children = (
+				385D9A4C1E9F183E0071A95A /* NSObject+YYModel.h */,
+				385D9A4D1E9F183E0071A95A /* NSObject+YYModel.m */,
+				385D9A4E1E9F183E0071A95A /* YYClassInfo.h */,
+				385D9A4F1E9F183E0071A95A /* YYClassInfo.m */,
+				385D9A501E9F183E0071A95A /* YYModel.h */,
+			);
+			path = YYModel;
+			sourceTree = "<group>";
+		};
 		386B75571E94C83E00081D09 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +124,7 @@
 				38E963ED1E9C69FF002B99C2 /* 2拖动排序+合并 */,
 				38E963F01E9C69FF002B99C2 /* 3测试专用 */,
 				181999661E9CAFB70010B98B /* 4测试专用2 */,
+				385D9A471E9F0DDC0071A95A /* 5YYModel测试 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -263,10 +306,15 @@
 				38BEF53F1E9DB96E00798528 /* MergeDetailView.m in Sources */,
 				181999691E9CB5590010B98B /* SecondTestViewController.m in Sources */,
 				38AB7E011E8DFA5B004C0A46 /* ViewController.m in Sources */,
+				385D9A511E9F183E0071A95A /* NSObject+YYModel.m in Sources */,
+				385D9A4A1E9F17940071A95A /* Test3ViewController.m in Sources */,
 				38BEF5461E9DBDCB00798528 /* MergeCollectionView.m in Sources */,
 				38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */,
+				381308A01E9F453600A512F0 /* TestJson.m in Sources */,
 				38E963F51E9C6A17002B99C2 /* TestViewController.m in Sources */,
 				38E963F11E9C69FF002B99C2 /* SortViewController.m in Sources */,
+				385D9A581E9F19180071A95A /* AppModel.m in Sources */,
+				385D9A521E9F183E0071A95A /* YYClassInfo.m in Sources */,
 				38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */,
 				38BEF53D1E9DB96E00798528 /* MergeCollectionViewCell.m in Sources */,
 				38E963F21E9C69FF002B99C2 /* MergeViewController.m in Sources */,

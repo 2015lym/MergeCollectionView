@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.badge.layer.cornerRadius = self.badge.frame.size.width / 2;
 }
 
 @end
