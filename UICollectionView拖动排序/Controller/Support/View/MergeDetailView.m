@@ -17,7 +17,7 @@ static NSString * const kTitle = @"kTitle";             //图片标题
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) UITapGestureRecognizer * tapGesture;
-//@property (nonatomic, assign) CGRect transformRect;
+@property (nonatomic, assign) CGRect transformRect;
 @end
 
 @implementation MergeDetailView
@@ -36,7 +36,16 @@ static NSString * const kTitle = @"kTitle";             //图片标题
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-//    _collectionView.frame = _transformRect;
+    CGFloat zoomValue = _transformRect.size.width/_collectionView.frame.size.width;
+    _collectionView.transform = CGAffineTransformMakeScale(zoomValue, zoomValue);
+    _collectionView.frame = _transformRect;
+    [UIView animateWithDuration:0.25 animations:^{
+        _collectionView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2+25);
+        _collectionView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+//        [_collectionView.superview layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        //移除截图视图、显示隐藏的cell并开启交互
+    }];
 }
 
 #pragma mark - ---------- 创建collectionView ----------
@@ -60,7 +69,6 @@ static NSString * const kTitle = @"kTitle";             //图片标题
     UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlelongGesture:)];
     longGesture.minimumPressDuration = 0.5f;//触发长按事件时间为：秒
     [_collectionView addGestureRecognizer:longGesture];
-//    _collectionView.transform = CGAffineTransformMakeScale(0.3f, 0.3f);
 
 }
 
@@ -174,21 +182,20 @@ static NSIndexPath *startIndexPath;   //起始路径
 }
 
 - (void)dismissContactView {
-    [[UIApplication sharedApplication].keyWindow removeGestureRecognizer:_tapGesture];
-    [self.superview removeFromSuperview];
-    self.close();
+    [UIView animateWithDuration:0.25 animations:^{
+        _collectionView.center = CGPointMake(_transformRect.origin.x+_transformRect.size.width/2, _transformRect.origin.y+_transformRect.size.height/2);
+        _collectionView.transform = CGAffineTransformMakeScale(_transformRect.size.width/self.frame.size.width, _transformRect.size.width/self.frame.size.width);
+    }completion:^(BOOL finished) {
+        [[UIApplication sharedApplication].keyWindow removeGestureRecognizer:_tapGesture];
+        [self.superview removeFromSuperview];
+        self.close();
+    }];
+
 }
 
 - (void)openCell:(CGRect )cellFrame{
-//    _transformRect = CGRectMake(cellFrame.origin.x, cellFrame.origin.y+84, cellFrame.size.width*3, cellFrame.size.height*3);
+    _transformRect = CGRectMake(cellFrame.origin.x, cellFrame.origin.y+84, cellFrame.size.width, cellFrame.size.height);
 //    [self setNeedsDisplay];
-//    [UIView animateWithDuration:0.25 animations:^{
-//        _collectionView.frame = CGRectMake(0, 0, cellFrame.size.width*3, cellFrame.size.height*3);;
-//        _collectionView.transform = CGAffineTransformMakeScale(0.9f, 0.9f);
-//        [_collectionView.superview layoutIfNeeded];
-//    } completion:^(BOOL finished) {
-//        //移除截图视图、显示隐藏的cell并开启交互
-//    }];
 }
 
 //- (UIView*)duplicate:(UIView*)view
