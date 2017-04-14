@@ -7,6 +7,7 @@
 //
 
 #import "AppModel.h"
+@implementation AppFolderListData
 
 @implementation AppFolderListData
 
@@ -25,4 +26,15 @@
 
 @implementation AppModel
 
+
 @end
+//- (instancetype)initWithModel:(NSDictionary *)model{
+//    if (self = [super init]) {
+//        [self setValuesForKeysWithDictionary:model];
+//    }
+//    return self;
+//}
+//
+//- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+//    NSLog(@"%@",key);
+//}
