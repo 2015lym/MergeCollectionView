@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "YYModel.h"
-
 
 @protocol AppFolderListData <NSObject>
 
