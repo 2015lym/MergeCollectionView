@@ -120,6 +120,8 @@ typedef NS_ENUM(NSInteger, kMoveType){
         detailView.close = ^(void){
             cell.hidden = NO;
         };
+    } else {
+        NSLog(@"%ld", indexPath.row);
     }
 }
 

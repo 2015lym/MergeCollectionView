@@ -13,7 +13,10 @@
 static NSString * const kImage = @"kImage";             //logo图片
 static NSString * const kTitle = @"kTitle";             //图片标题
 
-@interface MergeDetailView ()<UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate>
+@interface MergeDetailView ()<UICollectionViewDelegate,
+                              UICollectionViewDataSource,
+                              UITextFieldDelegate,
+                              UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) UITapGestureRecognizer * tapGesture;
@@ -29,9 +32,6 @@ static NSString * const kTitle = @"kTitle";             //图片标题
     _folderTitleTextField.delegate = self;
     
     [self createCollectionView];
-    
-    _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissContactView)];
-    [[UIApplication sharedApplication].keyWindow addGestureRecognizer:_tapGesture];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -46,6 +46,31 @@ static NSString * const kTitle = @"kTitle";             //图片标题
     } completion:^(BOOL finished) {
         //移除截图视图、显示隐藏的cell并开启交互
     }];
+    
+    _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissContactView)];
+    _tapGesture.delegate = self;
+    [[UIApplication sharedApplication].keyWindow addGestureRecognizer:_tapGesture];
+}
+
+//防止无法点击didselect
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (touch.view.frame.size.width == SCREEN_WIDTH) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)dismissContactView {
+    [UIView animateWithDuration:0.25 animations:^{
+        _collectionView.center = CGPointMake(_transformRect.origin.x+_transformRect.size.width/2, _transformRect.origin.y+_transformRect.size.height/2);
+        _collectionView.transform = CGAffineTransformMakeScale(_transformRect.size.width/self.frame.size.width, _transformRect.size.width/self.frame.size.width);
+    }completion:^(BOOL finished) {
+        [[UIApplication sharedApplication].keyWindow removeGestureRecognizer:_tapGesture];
+        [self.superview removeFromSuperview];
+        self.close();
+    }];
+    
 }
 
 #pragma mark - ---------- 创建collectionView ----------
@@ -176,21 +201,13 @@ static NSIndexPath *startIndexPath;   //起始路径
     }
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%ld", indexPath.row);
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     textField.text = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.folderTitle(textField.text);
-}
-
-- (void)dismissContactView {
-    [UIView animateWithDuration:0.25 animations:^{
-        _collectionView.center = CGPointMake(_transformRect.origin.x+_transformRect.size.width/2, _transformRect.origin.y+_transformRect.size.height/2);
-        _collectionView.transform = CGAffineTransformMakeScale(_transformRect.size.width/self.frame.size.width, _transformRect.size.width/self.frame.size.width);
-    }completion:^(BOOL finished) {
-        [[UIApplication sharedApplication].keyWindow removeGestureRecognizer:_tapGesture];
-        [self.superview removeFromSuperview];
-        self.close();
-    }];
-
 }
 
 - (void)openCell:(CGRect )cellFrame{

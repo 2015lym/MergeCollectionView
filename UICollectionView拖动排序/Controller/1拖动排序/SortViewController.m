@@ -84,6 +84,11 @@ static const int ITEM_NUMBER = 50;                     //item数量
                      atIndex:destinationIndexPath.row];
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%ld", indexPath.row);
+}
+
+
 #pragma mark - ---------- 拖动手势 ----------
 - (void)handlelongGesture:(UILongPressGestureRecognizer *)longGesture {
     switch (longGesture.state) {
