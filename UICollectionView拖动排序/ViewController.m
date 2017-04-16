@@ -10,7 +10,6 @@
 #import "SortViewController.h"
 #import "MergeViewController.h"
 #import "TestViewController.h"
-#import "Test3ViewController.h"
 
 @interface ViewController ()
 
@@ -42,12 +41,6 @@
     [btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn3 addTarget:self action:@selector(testVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn3];
-    
-    UIButton *btn5 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 75, 400, 150, 50)];
-    [btn5 setTitle:@"Model测试" forState:UIControlStateNormal];
-    [btn5 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn5 addTarget:self action:@selector(test3VC) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn5];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,9 +65,4 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-//Model测试用
-- (void)test3VC {
-    Test3ViewController *vc = [[Test3ViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 @end
