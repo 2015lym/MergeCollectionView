@@ -155,47 +155,64 @@ static NSIndexPath *startIndexPath;   //起始路径
             CGPoint currentPoint = [longGesture locationInView:self.collectionView];
             snapedView.center = CGPointMake(currentPoint.x, currentPoint.y);
             
-            //计算截图视图和哪个cell相交
-            for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
-                //当前隐藏的cell就不需要交换了，直接continue
-                if ([self.collectionView indexPathForCell:cell] == oldIndexPath) {
-                    currentIndexPath = oldIndexPath;
-                    continue;
-                }else{
-                //计算中心距
-                CGFloat space = sqrtf(pow(snapedView.center.x - cell.center.x, 2) + powf(snapedView.center.y - cell.center.y, 2));
-                NSLog(@"%f",space);
-                //如果相交一半就移动
-                if(space <= snapedView.bounds.size.width*1 / 2){
-                    currentIndexPath = [self.collectionView indexPathForCell:cell];
-                    //更改移动后的起始indexPath，用于后面获取隐藏的cell,是移动后的位置
-                    [self.collectionView moveItemAtIndexPath:startIndexPath toIndexPath:currentIndexPath];
-                    oldIndexPath = currentIndexPath;
-
-                    //移除数据插入到新的位置
-                    id obj = [_dataArray objectAtIndex:startIndexPath.item];
-                    [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
-                    [_dataArray insertObject:obj
-                                     atIndex:currentIndexPath.item];
-                }
-                }
-            }
             
-            UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:oldIndexPath];//原来隐藏的cell
-            UICollectionViewCell *targetCell = [self.collectionView cellForItemAtIndexPath:currentIndexPath];//移动目标cell
-            //结束动画过程中停止交互，防止出问题
-            self.collectionView.userInteractionEnabled = NO;
-            //给截图视图一个动画移动到隐藏cell的新位置
-            [UIView animateWithDuration:0.25 animations:^{
-                snapedView.center = targetCell.center;
-                snapedView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-            } completion:^(BOOL finished) {
-                //移除截图视图、显示隐藏的cell并开启交互
+            /*   拖出界删除   */
+            CGPoint checkPoint = [longGesture locationInView:self];
+            if (checkPoint.x < self.collectionView.frame.origin.x ||
+                checkPoint.x > self.collectionView.frame.origin.x + self.collectionView.frame.size.width ||
+                checkPoint.y < self.collectionView.frame.origin.y ||
+                checkPoint.y > self.collectionView.frame.origin.y + self.collectionView.frame.size.height) {
+                
+                //在这里填写拖出去要执行的代码
+                
+                NSLog(@"拖出界");
+                [_dataArray removeObjectAtIndex:startIndexPath.item];
                 [snapedView removeFromSuperview];
-                cell.hidden = NO;
-                self.collectionView.userInteractionEnabled = YES;
-                [self.collectionView reloadData];
-            }];
+                [self dismissContactView];
+                
+            } else {
+                //计算截图视图和哪个cell相交
+                for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
+                    //当前隐藏的cell就不需要交换了，直接continue
+                    if ([self.collectionView indexPathForCell:cell] == oldIndexPath) {
+                        currentIndexPath = oldIndexPath;
+                        continue;
+                    }else{
+                        //计算中心距
+                        CGFloat space = sqrtf(pow(snapedView.center.x - cell.center.x, 2) + powf(snapedView.center.y - cell.center.y, 2));
+                        NSLog(@"%f",space);
+                        //如果相交一半就移动
+                        if(space <= snapedView.bounds.size.width*1 / 2){
+                            currentIndexPath = [self.collectionView indexPathForCell:cell];
+                            //更改移动后的起始indexPath，用于后面获取隐藏的cell,是移动后的位置
+                            [self.collectionView moveItemAtIndexPath:startIndexPath toIndexPath:currentIndexPath];
+                            oldIndexPath = currentIndexPath;
+                            
+                            //移除数据插入到新的位置
+                            id obj = [_dataArray objectAtIndex:startIndexPath.item];
+                            [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
+                            [_dataArray insertObject:obj
+                                             atIndex:currentIndexPath.item];
+                        }
+                    }
+                }
+                
+                UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:oldIndexPath];//原来隐藏的cell
+                UICollectionViewCell *targetCell = [self.collectionView cellForItemAtIndexPath:currentIndexPath];//移动目标cell
+                //结束动画过程中停止交互，防止出问题
+                self.collectionView.userInteractionEnabled = NO;
+                //给截图视图一个动画移动到隐藏cell的新位置
+                [UIView animateWithDuration:0.25 animations:^{
+                    snapedView.center = targetCell.center;
+                    snapedView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+                } completion:^(BOOL finished) {
+                    //移除截图视图、显示隐藏的cell并开启交互
+                    [snapedView removeFromSuperview];
+                    cell.hidden = NO;
+                    self.collectionView.userInteractionEnabled = YES;
+                    [self.collectionView reloadData];
+                }];
+            }
         }
             break;
     }
