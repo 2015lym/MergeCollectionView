@@ -10,8 +10,8 @@
 #import "MergeCollectionViewCell.h"
 #import "Config.h"
 
-static NSString * const kImage = @"kImage";             //logo图片
-static NSString * const kTitle = @"kTitle";             //图片标题
+static NSString * const kImage = @"image";             //logo图片
+static NSString * const kTitle = @"title";             //图片标题
 
 @interface MergeDetailView ()<UICollectionViewDelegate,
                               UICollectionViewDataSource,
@@ -166,10 +166,10 @@ static NSIndexPath *startIndexPath;   //起始路径
                 //在这里填写拖出去要执行的代码
                 
                 NSLog(@"拖出界");
+                _removeItem(_dataArray[startIndexPath.item]);
                 [_dataArray removeObjectAtIndex:startIndexPath.item];
                 [snapedView removeFromSuperview];
-                [self dismissContactView];
-                
+//                [self dismissContactView];
             } else {
                 //计算截图视图和哪个cell相交
                 for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {

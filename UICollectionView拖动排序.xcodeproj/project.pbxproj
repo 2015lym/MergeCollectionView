@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18A346851EA5B37A00A4DEEC /* ItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A346841EA5B37A00A4DEEC /* ItemModel.m */; };
 		38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7DFA1E8DFA5B004C0A46 /* main.m */; };
 		38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7DFD1E8DFA5B004C0A46 /* AppDelegate.m */; };
 		38AB7E011E8DFA5B004C0A46 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AB7E001E8DFA5B004C0A46 /* ViewController.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18A346831EA5B37A00A4DEEC /* ItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemModel.h; sourceTree = "<group>"; };
+		18A346841EA5B37A00A4DEEC /* ItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemModel.m; sourceTree = "<group>"; };
 		38AB7DF61E8DFA5B004C0A46 /* UICollectionView拖动排序.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UICollectionView拖动排序.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AB7DFA1E8DFA5B004C0A46 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		38AB7DFC1E8DFA5B004C0A46 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -62,6 +65,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18A346821EA5B35000A4DEEC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18A346831EA5B37A00A4DEEC /* ItemModel.h */,
+				18A346841EA5B37A00A4DEEC /* ItemModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		386B75571E94C83E00081D09 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +129,7 @@
 		38BEF5331E9DB96E00798528 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				18A346821EA5B35000A4DEEC /* Model */,
 				38BEF5431E9DBAB400798528 /* Config.h */,
 				38BEF5341E9DB96E00798528 /* Cell */,
 				38BEF5391E9DB96E00798528 /* View */,
@@ -253,6 +266,7 @@
 				38AB7DFE1E8DFA5B004C0A46 /* AppDelegate.m in Sources */,
 				38E963F51E9C6A17002B99C2 /* TestViewController.m in Sources */,
 				38E963F11E9C69FF002B99C2 /* SortViewController.m in Sources */,
+				18A346851EA5B37A00A4DEEC /* ItemModel.m in Sources */,
 				38AB7DFB1E8DFA5B004C0A46 /* main.m in Sources */,
 				38BEF53D1E9DB96E00798528 /* MergeCollectionViewCell.m in Sources */,
 				38E963F21E9C69FF002B99C2 /* MergeViewController.m in Sources */,
