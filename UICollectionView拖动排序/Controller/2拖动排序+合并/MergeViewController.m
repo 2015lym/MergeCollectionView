@@ -10,11 +10,12 @@
 #import "MergeCollectionViewCell.h"
 #import "MergeCollectionView.h"
 #import "MergeDetailView.h"
+//#import "ItemModel.h"
 #import "Config.h"
 
 static const int ITEM_NUMBER = 10;                     //item数量
-static const NSString *kImage = @"kImage";             //logo图片
-static const NSString *kTitle = @"kTitle";             //图片标题
+static const NSString *kImage = @"image";             //logo图片
+static const NSString *kTitle = @"title";             //图片标题
 
 typedef NS_ENUM(NSInteger, kMoveType){
     kMoveTypeNone,
@@ -32,7 +33,7 @@ typedef NS_ENUM(NSInteger, kMoveType){
 @property (nonatomic, strong) NSMutableArray<NSArray *> *containerArray; //记录包含合并的数组
 
 @property (nonatomic, assign) kMoveType moveType;   //移动类型
-
+//@property (nonatomic, strong) ItemModel *itemModel;
 @end
 
 @implementation MergeViewController
@@ -54,6 +55,10 @@ typedef NS_ENUM(NSInteger, kMoveType){
         NSString *str = [NSString stringWithFormat:@"请假审批%d", i];
         UIImage *image = [UIImage imageNamed:@"proper_logo"];
         NSDictionary *dic = @{kImage:image,kTitle:str};
+//        _itemModel = [[ItemModel alloc]init];
+//        [_itemModel setValuesForKeysWithDictionary:dic];
+//        NSLog(@"%@",_itemModel.title);
+//        UIImageView *imageView = [[UIImageView alloc]initWithImage:_itemModel.image];
         [_dataArray addObject:dic];
         [self.containerArray addObject:@[dic]];
     }
@@ -107,18 +112,35 @@ typedef NS_ENUM(NSInteger, kMoveType){
                                       3 * SCREEN_WIDTH/4 + 1,
                                       3 * SCREEN_WIDTH/4 + 100);
         detailView.backgroundColor = [UIColor clearColor];
-        detailView.folderTitleTextField.text = _dataArray[indexPath.item][@"kTitle"];
+        detailView.folderTitleTextField.text = _dataArray[indexPath.item][kTitle];
         detailView.dataArray = [NSMutableArray arrayWithArray:self.containerArray[indexPath.item]];
         __weak typeof(self) weakSelf = self;
         detailView.folderTitle = ^(NSString *title) {
-            [_dataArray replaceObjectAtIndex:indexPath.item withObject:@{kTitle:title,kImage:_dataArray[indexPath.item][@"kImage"]}];
-            [weakSelf.collectionView reloadData];
+            [_dataArray replaceObjectAtIndex:indexPath.item withObject:@{kTitle:title,kImage:_dataArray[indexPath.item][kImage]}];
+//            [weakSelf.collectionView reloadData];
+        };
+        detailView.removeItem = ^(NSDictionary *item){
+            NSMutableArray *mutableArr = [[NSMutableArray alloc]init];
+            [mutableArr addObjectsFromArray:self.containerArray[indexPath.item]];
+            [mutableArr removeObject:item];
+            [self.containerArray replaceObjectAtIndex:indexPath.item withObject:mutableArr];
+            [self.containerArray addObject:@[item]];
+            
+            [_dataArray addObject:item];
+            if (self.containerArray[indexPath.item].count == 1) {
+                [_dataArray replaceObjectAtIndex:indexPath.item withObject:@{kTitle:self.containerArray[indexPath.item][0][kTitle],kImage:self.containerArray[indexPath.item][0][kImage]}];
+            }else{
+                [_dataArray replaceObjectAtIndex:indexPath.item withObject:@{kTitle:_dataArray[indexPath.item][kTitle],kImage:[self setMergeImageWithImageArray:self.containerArray[indexPath.item]]}];
+            }
+            NSIndexPath *insertPath = [NSIndexPath indexPathForRow:_dataArray.count-1 inSection:0];
+            [self.collectionView insertItemsAtIndexPaths:@[insertPath]];
         };
         [_grayView addSubview:detailView];
         [detailView openCell: [self.view convertRect:cell.frame toView:detailView]];
         cell.hidden = YES;
         detailView.close = ^(void){
             cell.hidden = NO;
+            [self.collectionView reloadData];
         };
     } else {
         NSLog(@"%ld", indexPath.row);
@@ -226,7 +248,7 @@ static NSIndexPath *startIndexPath;   //起始路径
                 if (_containerArray[currentIndexPath.item].count == 2) {
                     [_dataArray replaceObjectAtIndex:currentIndexPath.item withObject:@{kTitle:@"文件夹",kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
                 } else {
-                    [_dataArray replaceObjectAtIndex:currentIndexPath.item withObject:@{kTitle:_dataArray[currentIndexPath.item][@"kTitle"], kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
+                    [_dataArray replaceObjectAtIndex:currentIndexPath.item withObject:@{kTitle:_dataArray[currentIndexPath.item][kTitle], kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
                 }
 
                 [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
@@ -256,6 +278,9 @@ static NSIndexPath *startIndexPath;   //起始路径
 
 #pragma mark - ---------- 合成新图标 ----------
 - (UIImage *)setMergeImageWithImageArray:(NSArray *)imageArray{
+    if (imageArray.count == 1) {
+        return imageArray[0][kImage];
+    }
     //新图标大小
     CGSize size = CGSizeMake(SCREEN_WIDTH/4-40, SCREEN_WIDTH/4-40);
     UIGraphicsBeginImageContext(size);
