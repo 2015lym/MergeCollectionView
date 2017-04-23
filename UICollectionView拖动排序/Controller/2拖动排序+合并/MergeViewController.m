@@ -106,7 +106,8 @@ typedef NS_ENUM(NSInteger, kMoveType){
     if (_containerArray[indexPath.item].count != 1) {
         [self setGrayView];
         UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
-        MergeDetailView *detailView = [[NSBundle mainBundle] loadNibNamed:@"MergeDetailView" owner:self options:nil].lastObject;
+        __block MergeDetailView *detailView = [[NSBundle mainBundle] loadNibNamed:@"MergeDetailView" owner:self options:nil].lastObject;
+        __weak MergeDetailView *weakDetailView = detailView;
         detailView.frame = CGRectMake(SCREEN_WIDTH/8,
                                       (SCREEN_HEIGHT - 3 * SCREEN_WIDTH/4)/2 - 50,
                                       3 * SCREEN_WIDTH/4 + 1,
@@ -114,7 +115,6 @@ typedef NS_ENUM(NSInteger, kMoveType){
         detailView.backgroundColor = [UIColor clearColor];
         detailView.folderTitleTextField.text = _dataArray[indexPath.item][kTitle];
         detailView.dataArray = [NSMutableArray arrayWithArray:self.containerArray[indexPath.item]];
-        __weak typeof(self) weakSelf = self;
         detailView.folderTitle = ^(NSString *title) {
             [_dataArray replaceObjectAtIndex:indexPath.item withObject:@{kTitle:title,kImage:_dataArray[indexPath.item][kImage]}];
 //            [weakSelf.collectionView reloadData];
@@ -129,11 +129,12 @@ typedef NS_ENUM(NSInteger, kMoveType){
             [_dataArray addObject:item];
             if (self.containerArray[indexPath.item].count == 1) {
                 [_dataArray replaceObjectAtIndex:indexPath.item withObject:@{kTitle:self.containerArray[indexPath.item][0][kTitle],kImage:self.containerArray[indexPath.item][0][kImage]}];
+                [weakDetailView dismissContactView];
             }else{
                 [_dataArray replaceObjectAtIndex:indexPath.item withObject:@{kTitle:_dataArray[indexPath.item][kTitle],kImage:[self setMergeImageWithImageArray:self.containerArray[indexPath.item]]}];
+                NSIndexPath *insertPath = [NSIndexPath indexPathForRow:_dataArray.count-1 inSection:0];
+                [self.collectionView insertItemsAtIndexPaths:@[insertPath]];
             }
-            NSIndexPath *insertPath = [NSIndexPath indexPathForRow:_dataArray.count-1 inSection:0];
-            [self.collectionView insertItemsAtIndexPaths:@[insertPath]];
         };
         [_grayView addSubview:detailView];
         [detailView openCell: [self.view convertRect:cell.frame toView:detailView]];

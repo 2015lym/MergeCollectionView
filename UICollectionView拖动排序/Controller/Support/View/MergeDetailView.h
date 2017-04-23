@@ -22,4 +22,5 @@
 
 - (void)openCell:(CGRect )cellFrame;
 
+- (void)dismissContactView;
 @end
