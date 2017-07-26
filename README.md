@@ -11,6 +11,6 @@
 - 拖动从文件夹移除
 - 文件夹内超过9个可以翻页查看
 
-`gif 加载的比较慢，非常抱歉`
+`下面的 gif 加载的比较慢。对你有帮助的话请给个 star，谢谢啦`
 
 ![拖动排序合并](http://upload-images.jianshu.io/upload_images/2024647-0e56b4d288b10123.gif?imageMogr2/auto-orient/strip)
