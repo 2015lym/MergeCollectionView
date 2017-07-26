@@ -10,7 +10,6 @@
 #import "MergeCollectionViewCell.h"
 #import "MergeCollectionView.h"
 #import "MergeDetailView.h"
-//#import "ItemModel.h"
 #import "Config.h"
 
 static const int ITEM_NUMBER = 10;                     //item数量
@@ -33,7 +32,7 @@ typedef NS_ENUM(NSInteger, kMoveType){
 @property (nonatomic, strong) NSMutableArray<NSArray *> *containerArray; //记录包含合并的数组
 
 @property (nonatomic, assign) kMoveType moveType;   //移动类型
-//@property (nonatomic, strong) ItemModel *itemModel;
+
 @end
 
 @implementation MergeViewController
@@ -55,10 +54,6 @@ typedef NS_ENUM(NSInteger, kMoveType){
         NSString *str = [NSString stringWithFormat:@"请假审批%d", i];
         UIImage *image = [UIImage imageNamed:@"proper_logo"];
         NSDictionary *dic = @{kImage:image,kTitle:str};
-//        _itemModel = [[ItemModel alloc]init];
-//        [_itemModel setValuesForKeysWithDictionary:dic];
-//        NSLog(@"%@",_itemModel.title);
-//        UIImageView *imageView = [[UIImageView alloc]initWithImage:_itemModel.image];
         [_dataArray addObject:dic];
         [self.containerArray addObject:@[dic]];
     }
@@ -86,14 +81,12 @@ typedef NS_ENUM(NSInteger, kMoveType){
 
 
 #pragma mark - ---------- item数量 ----------
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
 #pragma mark - ---------- Cell的内容 ----------
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MergeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MergeCollectionViewCell"
                                                                               forIndexPath:indexPath];
     cell.contentLabel.text = self.dataArray[indexPath.item][kTitle];
@@ -117,7 +110,6 @@ typedef NS_ENUM(NSInteger, kMoveType){
         detailView.dataArray = [NSMutableArray arrayWithArray:self.containerArray[indexPath.item]];
         detailView.folderTitle = ^(NSString *title) {
             [_dataArray replaceObjectAtIndex:indexPath.item withObject:@{kTitle:title,kImage:_dataArray[indexPath.item][kImage]}];
-//            [weakSelf.collectionView reloadData];
         };
         detailView.removeItem = ^(NSDictionary *item){
             NSMutableArray *mutableArr = [[NSMutableArray alloc]init];
@@ -138,9 +130,9 @@ typedef NS_ENUM(NSInteger, kMoveType){
         };
         [_grayView addSubview:detailView];
         [detailView openCell: [self.view convertRect:cell.frame toView:detailView]];
-        cell.hidden = YES;
+//        cell.hidden = YES;
         detailView.close = ^(void){
-            cell.hidden = NO;
+//            cell.hidden = NO;
             [self.collectionView reloadData];
         };
     } else {

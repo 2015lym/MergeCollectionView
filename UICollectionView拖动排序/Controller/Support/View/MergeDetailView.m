@@ -42,7 +42,6 @@ static NSString * const kTitle = @"title";             //图片标题
     [UIView animateWithDuration:0.25 animations:^{
         _collectionView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2+25);
         _collectionView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
-//        [_collectionView.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
         //移除截图视图、显示隐藏的cell并开启交互
     }];
@@ -169,7 +168,8 @@ static NSIndexPath *startIndexPath;   //起始路径
                 _removeItem(_dataArray[startIndexPath.item]);
                 [_dataArray removeObjectAtIndex:startIndexPath.item];
                 [snapedView removeFromSuperview];
-//                [self dismissContactView];
+                [self dismissContactView];
+                [self.collectionView reloadData];
             } else {
                 //计算截图视图和哪个cell相交
                 for (UICollectionViewCell *cell in [self.collectionView visibleCells]) {
@@ -229,12 +229,7 @@ static NSIndexPath *startIndexPath;   //起始路径
 
 - (void)openCell:(CGRect )cellFrame{
     _transformRect = CGRectMake(cellFrame.origin.x, cellFrame.origin.y+84, cellFrame.size.width, cellFrame.size.height);
-//    [self setNeedsDisplay];
+    [self setNeedsDisplay];
 }
 
-//- (UIView*)duplicate:(UIView*)view
-//{
-//    NSData * tempArchive = [NSKeyedArchiver archivedDataWithRootObject:view];
-//    return [NSKeyedUnarchiver unarchiveObjectWithData:tempArchive];
-//}
 @end

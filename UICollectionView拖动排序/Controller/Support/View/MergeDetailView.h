@@ -16,7 +16,6 @@
 //修改标题
 @property (nonatomic, copy) void(^folderTitle)(NSString *title);
 //移除App
-//@property (nonatomic, copy) void(^removeApp)(AppList *item);
 @property (nonatomic, copy) void(^removeItem)(NSDictionary *item);
 @property (nonatomic, copy) void (^close)(void);
 

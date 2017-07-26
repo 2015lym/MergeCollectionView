@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import "SortViewController.h"
 #import "MergeViewController.h"
-#import "TestViewController.h"
 
 @interface ViewController ()
 
@@ -36,11 +35,6 @@
     [btn2 addTarget:self action:@selector(mergeVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
     
-//    UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 75, 300, 150, 50)];
-//    [btn3 setTitle:@"羔羊测试" forState:UIControlStateNormal];
-//    [btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [btn3 addTarget:self action:@selector(testVC) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn3];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,12 +50,6 @@
 //合并+排序
 - (void)mergeVC {
     MergeViewController *vc = [[MergeViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-//gy测试用
-- (void)testVC {
-    TestViewController *vc = [[TestViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
