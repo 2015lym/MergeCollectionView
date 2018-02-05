@@ -79,13 +79,13 @@ static const int ITEM_NUMBER = 50;                     //item数量
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath*)destinationIndexPath {
     //移除数据插入到新的位置
     id obj = [_dataArray objectAtIndex:sourceIndexPath.row];
-    [_dataArray removeObject:[_dataArray objectAtIndex:sourceIndexPath.row]];
+    [_dataArray removeObjectAtIndex:sourceIndexPath.row];
     [_dataArray insertObject:obj
                      atIndex:destinationIndexPath.row];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%ld", indexPath.row);
+    NSLog(@"%zd", indexPath.row);
 }
 
 

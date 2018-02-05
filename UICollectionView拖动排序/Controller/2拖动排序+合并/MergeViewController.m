@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, kMoveType){
             [self.collectionView reloadData];
         };
     } else {
-        NSLog(@"%ld", indexPath.row);
+        NSLog(@"%zd", indexPath.row);
     }
 }
 
@@ -221,11 +221,11 @@ static NSIndexPath *startIndexPath;   //起始路径
                 //移除数据插入到新的位置
                 [self.collectionView moveItemAtIndexPath:startIndexPath toIndexPath:currentIndexPath];
                 id obj = [_dataArray objectAtIndex:startIndexPath.item];
-                [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
+                [_dataArray removeObjectAtIndex:startIndexPath.item];
                 [_dataArray insertObject:obj
                                  atIndex:currentIndexPath.item];
                 id containerObj = [self.containerArray objectAtIndex:startIndexPath.item];
-                [self.containerArray removeObject:[self.containerArray objectAtIndex:startIndexPath.item]];
+                [self.containerArray removeObjectAtIndex:startIndexPath.item];
                 [self.containerArray insertObject:containerObj
                                  atIndex:currentIndexPath.item];
                 
@@ -244,7 +244,7 @@ static NSIndexPath *startIndexPath;   //起始路径
                     [_dataArray replaceObjectAtIndex:currentIndexPath.item withObject:@{kTitle:_dataArray[currentIndexPath.item][kTitle], kImage:[self setMergeImageWithImageArray:self.containerArray[currentIndexPath.item]]}];
                 }
 
-                [_dataArray removeObject:[_dataArray objectAtIndex:startIndexPath.item]];
+                [_dataArray removeObjectAtIndex:startIndexPath.item];
                 [self.containerArray removeObjectAtIndex:startIndexPath.item];
             }else if (_moveType == kMoveTypeNone){
                 currentIndexPath = startIndexPath;
